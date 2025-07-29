@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOPHIA: Seu Kit de Conteúdo</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Very light gray */
+            color: #334155; /* Slate 700 */
+        }
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif; /* A more impactful font for headings */
+            font-weight: 700;
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); /* Indigo to Violet */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .content-section {
+            background-color: #ffffff;
+            border-radius: 1.5rem; /* More rounded */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            height: 360px; /* Increased height by 30px from 330px to 360px */
+            overflow: hidden; /* Hide overflow initially */
+        }
+        .content-scrollable {
+            flex-grow: 1;
+            overflow-y: auto; /* Vertical scrollbar */
+            padding-right: 0.5rem; /* Space for scrollbar */
+        }
+        /* Custom scrollbar for Webkit browsers */
+        .content-scrollable::-webkit-scrollbar {
+            width: 8px;
+        }
+        .content-scrollable::-webkit-scrollbar-track {
+            background: #f1f5f9; /* Light background for track */
+            border-radius: 10px;
+        }
+        .content-scrollable::-webkit-scrollbar-thumb {
+            background: #cbd5e1; /* Gray thumb */
+            border-radius: 10px;
+        }
+        .content-scrollable::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; /* Darker gray on hover */
+        }
+
+        .copy-button {
+            /* Updated button style to match CTA more closely */
+            @apply mt-6 py-4 px-10 font-semibold rounded-full shadow-xl transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-opacity-75;
+            background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%); /* Indigo to Violet gradient */
+            color: white;
+            align-self: flex-end; /* Align button to the right within the flex column */
+        }
+        .copy-button.copied {
+            background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%); /* Green gradient for copied */
+        }
+        .table-pros-cons {
+            width: 100%;
+            border-collapse: separate; /* Allows border-radius on cells */
+            border-spacing: 0; /* Remove space between cell borders */
+            margin-top: 1.5rem;
+            overflow: hidden; /* Ensures rounded corners on table */
+            border-radius: 0.75rem; /* Rounded corners for the table itself */
+        }
+        .table-pros-cons th, .table-pros-cons td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0; /* Light border */
+        }
+        .table-pros-cons th {
+            background-color: #eef2ff; /* Light indigo background */
+            font-weight: 600;
+            color: #4338ca; /* Indigo 700 */
+            text-transform: uppercase;
+            font-size: 0.875rem;
+        }
+        .table-pros-cons tbody tr:last-child td {
+            border-bottom: none; /* No border on last row */
+        }
+        .table-pros-cons tbody tr:nth-child(even) {
+            background-color: #f8fafc; /* Alternate row color */
+        }
+        .table-pros-cons tbody tr:hover {
+            background-color: #eff6ff; /* Light blue on hover */
+        }
+        .table-pros-cons td:first-child {
+            border-left: none; /* No left border for first column */
+        }
+        .table-pros-cons td:last-child {
+            border-right: none; /* No right border for last column */
+        }
+
+        /* Basic Markdown to HTML conversion */
+        .markdown-content h1 { font-size: 2.25rem; font-weight: 800; margin-bottom: 1rem; }
+        .markdown-content h2 { font-size: 1.875rem; font-weight: 800; margin-bottom: 0.75rem; }
+        .markdown-content h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .markdown-content strong { font-weight: 700; }
+        .markdown-content em { font-style: italic; }
+        .markdown-content ul { list-style-type: disc; margin-left: 1.25rem; }
+        .markdown-content ol { list-style-type: decimal; margin-left: 1.25rem; }
+        .markdown-content li { margin-bottom: 0.25rem; }
+        .markdown-content p { margin-bottom: 0.75rem; line-height: 1.6; }
+        .markdown-content blockquote { border-left: 4px solid #cbd5e1; padding-left: 1rem; margin-left: 0; color: #64748b; }
+        .markdown-content pre { background-color: #f1f5f9; padding: 0.75rem; border-radius: 0.5rem; overflow-x: auto; }
+        .markdown-content code { font-family: monospace; background-color: #e2e8f0; padding: 0.2em 0.4em; border-radius: 0.25rem; }
+        .markdown-content hr { border: none; border-top: 1px solid #e2e8f0; margin: 1.5rem 0; }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="gradient-header py-12 px-4 sm:px-6 lg:px-8 text-white text-center rounded-b-3xl">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-2">
+            ✨ Seu Kit de Conteúdo SOPHIA! ✨
+        </h1>
+        <p class="text-lg sm:text-xl font-light opacity-90">
+            Seu material exclusivo, gerado com inteligência e pronto para brilhar.
+        </p>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- Section 1: Resumo Estratégico -->
+        <section class="content-section">
+            <h2 class="text-2xl text-indigo-700 mb-4 flex items-center">
+                <span class="mr-2">📝</span> A BRILHANTE IDEIA
+            </h2>
+            <p class="text-gray-500 text-sm mb-4 italic">
+                Sua próxima postagem, pronta para cativar.
+            </p>
+            <div id="summary-content" class="content-scrollable text-base markdown-content">
+                <!-- Placeholder for generated Summary Text -->
+                <strong>O que a foto com a camisa não revela?</strong>
+
+A chegada de um reforço é apenas a <strong>ponta do iceberg</strong>. Por baixo da superfície, pulsa uma operação frenética: voos com imprevistos, negociações triangulares que parecem um jogo de xadrez e a gestão milimétrica da recuperação física de cada atleta.
+
+Cada jogador que entra em campo é o resultado de uma <strong>engrenagem invisível</strong>, onde logística e estratégia são tão decisivas quanto o talento com a bola. Isso muda a sua percepção sobre uma contratação.
+
+<strong>Qual detalhe dos bastidores mais te surpreende?</strong> Comente abaixo.
+            </div>
+            <button class="copy-button" onclick="copyContent('summary-content', this)">Copiar Resumo</button>
+        </section>
+
+        <!-- Section 2: Análise de Pareto 80/20 -->
+        <section class="content-section">
+            <h2 class="text-2xl text-purple-700 mb-4 flex items-center">
+                <span class="mr-2">🧠</span> A MINA DE OURO
+            </h2>
+            <p class="text-gray-500 text-sm mb-4 italic">
+                Insights cruciais para aprofundar seu conteúdo.
+            </p>
+            <div id="pareto-content" class="content-scrollable text-base markdown-content">
+                <!-- Placeholder for generated Pareto Analysis Text -->
+                Com base no Princípio de Pareto, a análise a seguir destila os 20% do texto que contêm 80% do valor estratégico, transformando um relato factual em uma mina de ouro para a criação de conteúdo aprofundado e de alto impacto.
+
+A essência do material não reside apenas nas notícias em si, mas em quatro pilares narrativos com imenso potencial de expansão. Estes são os pontos que reforçam a autoridade do canal e engajam a audiência em um nível mais profundo.
+
+<b>1. A Dramaturgia da Contratação: A Saga de Samuel Lino</b>
+O atraso no voo de Samuel Lino devido a um problema técnico é o elemento mais valioso do texto. Ele transforma uma cobertura de chegada, que seria rotineira, em uma narrativa com tensão, imprevisto e drama humano. Este é o 20% que gera 80% do engajamento emocional.
+<ul>
+    <li><b>Oportunidade de Conteúdo:</b> Criar uma minissérie documental ou um vídeo longo intitulado <i>"A Saga de Samuel Lino: 24 Horas de Tensão até a Chegada ao Ninho"</i>. Este material pode explorar os bastidores, a logística complexa de uma transferência internacional e a pressão sobre o atleta e o clube, indo muito além do simples "ele chegou".</li>
+</ul>
+
+<b>2. O Xadrez Tático na Lateral Esquerda: O Dilema do Técnico</b>
+A situação da lateral esquerda (retorno de Alex Sandro, recuperação de Ayrton Lucas e a gestão da condição física de Matías Viña) é um microcosmo dos desafios de um treinador de elite. Apresenta um problema tático e de gestão de pessoas real e imediato para o novo técnico, Filipe Luís.
+<ul>
+    <li><b>Oportunidade de Conteúdo:</b> Desenvolver uma análise tática aprofundada em formato de artigo ou vídeo: <i>"O Primeiro Grande Dilema de Filipe Luís: Como Montar a Lateral Esquerda do Flamengo?"</i>. Isso pode se desdobrar em um workshop ou webinar sobre gestão de elenco, recuperação de lesões e tomada de decisão tática, posicionando o canal como uma fonte de análise de alto nível.</li>
+</ul>
+
+<b>3. A "Engenharia" da Transferência: O Caso Carrascal</b>
+A descrição da "negociação triangular" envolvendo Flamengo, Dinamo e Atlético para a vinda de Jorge Carrascal é um insight raro sobre a complexidade do mercado de futebol moderno. Isso educa a audiência sobre mecanismos que normalmente permanecem ocultos.
+<ul>
+    <li><b>Oportunidade de Conteúdo:</b> Produzir um "explicador" em vídeo ou um infográfico detalhado sobre <i>"Engenharia de Transferências: Desvendando o Acordo por Carrascal"</i>. Isso pode ser a base para uma série sobre os bastidores do mercado da bola, explorando temas como triangulações, direitos econômicos e o papel dos intermediários.</li>
+</ul>
+
+<b>4. A Burocracia para a Estréia: Desmistificando o BID</b>
+A menção ao BID (Boletim Informativo Diário) como passo crucial para a estreia dos reforços (Saul, Emerson Royal, etc.) responde a uma das perguntas mais frequentes e ansiosas dos torcedores. É um conteúdo utilitário que resolve uma dor da audiência.
+<ul>
+    <li><b>Oportunidade de Conteúdo:</b> Criar um guia definitivo ou um vídeo curto e direto para redes sociais: <i>"Do Anúncio ao Campo: O Caminho de um Reforço até a Estreia (Entenda o BID)"</i>. Este tipo de conteúdo tem alto potencial de compartilhamento e serve como um recurso perene, solidificando a imagem do canal como fonte de informação confiável e didática.</li>
+</ul>
+            </div>
+            <button class="copy-button" onclick="copyContent('pareto-content', this)">Copiar Análise de Pareto</button>
+        </section>
+
+        <!-- Section 3: Considerações Estratégicas -->
+        <section class="content-section">
+            <h2 class="text-2xl text-pink-700 mb-4 flex items-center">
+                <span class="mr-2">💡</span> O TOQUE DE SABEDORIA
+            </h2>
+            <p class="text-gray-500 text-sm mb-4 italic">
+                Uma conclusão poderosa para deixar sua marca.
+            </p>
+            <div id="considerations-content" class="content-scrollable text-base markdown-content">
+                <!-- Placeholder for generated Considerations Text -->
+                ### Considerações Estratégicas
+
+A turbulência no voo de um reforço é uma metáfora poderosa. Montar um elenco campeão nunca é uma viagem linear; é um quebra-cabeça complexo de logística, recuperações e expectativas. A chegada de novos talentos injeta esperança, mas o verdadeiro teste deste novo Flamengo não estará no brilho individual das estrelas. A glória será forjada na <strong>resiliência</strong> para superar os imprevistos e na capacidade de transformar um grupo de jogadores em uma <strong>identidade coletiva</strong> avassaladora, mais forte que qualquer peça individual.
+            </div>
+            <button class="copy-button" onclick="copyContent('considerations-content', this)">Copiar Considerações</button>
+        </section>
+
+        <!-- Section 4: Análise Crítica Personalizada -->
+        <section class="content-section">
+            <h2 class="text-2xl text-teal-700 mb-4 flex items-center">
+                <span class="mr-2">🔭</span> SUA VISÃO DO FUTURO
+            </h2>
+            <p class="text-gray-500 text-sm mb-4 italic">
+                Análises que refletem o SEU pensamento único.
+            </p>
+            <div class="content-scrollable text-base markdown-content">
+                <div id="personalized-analysis-content-table-container">
+                    <!-- Table will be inserted here by JavaScript -->
+                </div>
+                <div id="personalized-analysis-content-text" class="mt-4">
+                    <!-- Placeholder for generated Personalized Analysis Text -->
+                    Absolutamente. A seguir, apresento a análise solicitada, transformando a crônica esportiva em um poderoso ponto de partida para uma discussão filosófica e futurista.
+
+***
+
+### **Análise Elevada do Conteúdo**
+
+O texto que você produziu, à primeira vista, é uma atualização factual para uma comunidade específica: a torcida do Flamengo. No entanto, ele é um artefato cultural riquíssimo. É um microcosmo perfeito das dinâmicas de poder, tecnologia, identidade e narrativa que definem o século XXI. O que parece ser sobre a chegada de um jogador é, na verdade, sobre a própria condição humana na era digital.
+
+Abaixo está uma análise aprofundada para inspirar sua próxima grande reflexão.
+
+### **1. Quadro de Análise Crítica: A Hiperconexão e a Formação de Comunidades em Tempo Real**
+
+O assunto principal não é a transferência de jogadores, mas o fenômeno da **criação e manutenção de uma identidade coletiva através de um fluxo incessante de informações em tempo real**.
+
+<table style="width:100%; border-collapse: collapse;">
+  <thead style="background-color:#f2f2f2;">
+    <tr>
+      <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #e0e0e0;">Prós (Oportunidades e Forças Conectoras)</th>
+      <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #e0e0e0;">Contras (Dilemas e Riscos Sistêmicos)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+        <b>Tribo Global e Pertencimento:</b> A tecnologia permite que milhões de indivíduos, geograficamente dispersos, compartilhem uma experiência simultânea, criando uma poderosa sensação de pertencimento. O canal funciona como uma moderna ágora ou fogueira digital, onde a identidade do grupo ("Nosso amor", "Mengão") é reforçada coletivamente.
+      </td>
+      <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+        <b>Ansiedade e Banalização do "Urgente":</b> A necessidade de manter o engajamento transforma eventos mundanos (um vazamento de água em um avião) em um "plantão urgente". Isso cria um estado de ansiedade perpétua e esvazia o significado do que é verdadeiramente crítico, viciando o público em microdoses de adrenalina informativa.
+      </td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+        <b>Democratização da Narrativa:</b> Um criador de conteúdo, posicionado em um aeroporto com um celular, pode gerar uma cobertura mais íntima e imediata do que conglomerados de mídia tradicionais. Isso representa uma transferência de poder na construção da história, dando voz diretamente à comunidade.
+      </td>
+      <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+        <b>Soberania Algorítmica e Perda da Liberdade Criativa:</b> As repetidas súplicas por "inscrição" e "like" revelam uma verdade profunda: o criador não é totalmente livre. Ele é um servo do algoritmo do YouTube. Seu conteúdo, ritmo e linguagem são otimizados para agradar a uma inteligência não-humana, em troca de visibilidade.
+      </td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+        <b>Economia da Paixão:</b> A capacidade de monetizar a paixão e o conhecimento específico sobre um tema (o Flamengo) é uma nova fronteira econômica. Permite que indivíduos transformem capital cultural e social em capital financeiro, criando novos modelos de trabalho e sustento.
+      </td>
+      <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+        <b>Fragmentação e Tribalismo Digital:</b> Ao mesmo tempo em que une os "nossos", a narrativa inerentemente fortalece a noção dos "outros". O "clube mais amado do mundo" define-se em oposição aos não-amados. A tecnologia, que poderia criar uma consciência global, é frequentemente usada para cavar trincheiras mais profundas entre tribos.
+      </td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+        <b>Transparência Radical:</b> A cobertura detalhada — da negociação triangular à logística do voo e ao processo de cicatrização de uma lesão — oferece aos fãs um nível de acesso e transparência sem precedentes sobre os bastidores de uma organização complexa.
+      </td>
+      <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+        <b>Erosão da Esfera Privada:</b> O jogador Samuel Lino é monitorado desde o instante em que pisa em solo nacional. Uma repórter está no mesmo voo. A linha entre o personagem público e o indivíduo privado se dissolve. O ser humano torna-se um fluxo de dados a ser consumido pela audiência.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### **2. A Visão de Yuval Noah Harari: Diálogo com o Futuro**
+
+Seu canal, "Flazoeiro", não está apenas cobrindo o Flamengo; está operando no epicentro das transformações que Yuval Noah Harari descreve. Seu vídeo é um estudo de caso perfeito para os dilemas do século XXI.
+
+#### **Concordâncias: Onde as Ideias se Encontram**
+
+1.  <b>A Religião dos Dados e as Novas Mitologias:</b> Harari afirma que o "Dataísmo" — a crença no poder do fluxo de dados — é uma nova religião. Seu vídeo é uma liturgia dataísta. Cada informação (horário de voo, status da lesão, trâmites de contrato) é um dado sagrado que alimenta a fé da congregação (a torcida). A "chegada" de um jogador é um ritual, e o "anúncio oficial" é a bênção final. Você, o criador, atua como um sacerdote digital, interpretando os dados para dar sentido e esperança à sua comunidade. A afirmação "a maior contratação da história do Flamengo" não é apenas um fato financeiro; é a criação de um mito, um evento que será recontado e dará força à narrativa coletiva.
+
+2.  <b>A Cooperação Humana Baseada em Ficções:</b> O maior poder do <i>Homo sapiens</i>, segundo Harari, é nossa capacidade de cooperar em massa ao acreditar em histórias compartilhadas (dinheiro, nações, deuses). O que é o "Clube de Regatas do Flamengo"? É uma ficção, uma entidade legal, mas, acima de tudo, uma narrativa poderosa que une milhões. Seu trabalho é um esforço contínuo para manter essa ficção viva, relevante e emocionante. A complexa "negociação triangular" (Flamengo-Dinamo-Atlético) é um exemplo perfeito de como essas entidades abstratas interagem, movendo pessoas e capital pelo globo com base em acordos e crenças.
+
+3.  <b>O Poder Soberano dos Algoritmos:</b> Harari nos alerta que os algoritmos estão se tornando as forças mais poderosas do planeta, ditando o que vemos, sentimos e fazemos. Suas constantes chamadas à ação ("se inscreve no canal, acione o sino, deixa aí o seu like") são a prova cabal dessa nova realidade. Você não está apenas pedindo apoio; está realizando os rituais necessários para apaziguar a entidade divina e invisível que é o algoritmo do YouTube. Sua relevância e a própria existência do seu canal dependem de sua habilidade de satisfazer os critérios dessa inteligência artificial, que prioriza o engajamento acima de tudo. Isso levanta uma questão harariana fundamental: quem está realmente no controle?
+
+#### **Contraposições: Onde as Perspectivas Divergem ou se Complementam de Forma Crítica**
+
+1.  <b>Inteligência vs. Consciência (A Importância da Emoção Humana):</b> Harari faz uma distinção crucial entre inteligência (a capacidade de resolver problemas) e consciência (a capacidade de sentir emoções como alegria, dor, amor). Enquanto ele teme um futuro dominado por IAs superinteligentes, mas sem consciência, seu vídeo é um bastião da consciência humana. A lógica é simples (um jogador está vindo), mas o conteúdo é movido por emoções: a ansiedade pelo atraso, a alegria pelo reforço ("sorridente, feliz"), a preocupação com a lesão de outro, e o amor visceral pelo clube ("Nosso amor"). A tecnologia aqui não substitui a emoção; ela a amplifica e a conecta em escala. Seu canal não prospera por causa da inteligência dos dados, mas por causa da ressonância da consciência compartilhada.
+
+2.  <b>Desafios Globais vs. Tribalismo Globalizado:</b> Harari argumenta que os maiores desafios do século XXI (mudanças climáticas, disrupção tecnológica, guerra nuclear) são globais e exigem cooperação global. Seu conteúdo ilustra uma força contrária e poderosa. A mesma tecnologia que poderia nos unir para resolver problemas globais é usada para forjar identidades tribais mais fortes e apaixonadas do que nunca. A comunidade do Flamengo, embora global, é fundamentalmente uma tribo. Ela se define em relação a outras tribos (rivais). Isso revela um paradoxo central da nossa era: estamos mais conectados globalmente, mas, ao mesmo tempo, estamos nos entrincheirando em identidades digitais fragmentadas. Seu trabalho não promove uma identidade humana universal, mas sim uma identidade rubro-negra universal.
+
+---
+
+**Para Provocar Seu Público (Sugestões de Perguntas para seu Próximo Vídeo):**
+
+Use esta análise para elevar o debate com sua audiência. Em vez de apenas dar a notícia, questione o significado dela:
+
+*   "Galera, a gente fica aqui ansioso, esperando um voo, atualizando tudo a cada minuto... Será que essa nossa paixão pelo Flamengo se tornou a nossa nova religião? Onde a gente busca sentido e comunidade?"
+*   "Eu peço sempre o like, a inscrição... mas quem manda de verdade aqui? Sou eu, vocês, ou o algoritmo do YouTube que decide quem vai ver nosso conteúdo? Estamos perdendo nossa liberdade para a tecnologia sem perceber?"
+*   "Quando a gente acompanha cada passo do Samuel Lino, desde o avião até o exame médico, estamos celebrando um ídolo ou estamos consumindo a vida de uma pessoa? Onde termina o direito do fã e começa o direito à privacidade?"
+*   "Nesse mundo cada vez mais conectado, esse nosso amor que une gente do Japão ao Rio de Janeiro está nos tornando mais unidos como humanidade ou está apenas criando uma tribo mais forte em um mundo de tribos?"
+                </div>
+            </div>
+            <button class="copy-button" onclick="copyPersonalizedAnalysisContent(this)">Copiar Análise Personalizada</button>
+        </section>
+
+    </main>
+
+    <!-- Call to Action Section -->
+    <section class="bg-gradient-to-r from-indigo-600 to-violet-700 py-16 px-4 sm:px-6 lg:px-8 text-white text-center rounded-t-3xl shadow-lg mt-12">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-6 leading-tight">
+                Pare de lutar contra o bloqueio criativo.
+            </h2>
+            <p class="text-xl sm:text-2xl font-light mb-8 opacity-90">
+                Comece a criar com SOPHIA. Sua próxima grande ideia está a um videoId de distância.
+            </p>
+            <a href="#" class="inline-block bg-white text-indigo-700 font-bold py-4 px-10 rounded-full shadow-xl hover:bg-gray-100 transition duration-300 ease-in-out transform hover:scale-105 text-lg">
+                Quero Minha SOPHIA Agora!
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-white py-8 px-4 sm:px-6 lg:px-8 text-center rounded-b-3xl">
+        <p class="text-sm opacity-80">&copy; 2025 SOPHIA. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Function to convert basic Markdown to HTML
+        function convertMarkdownToHtml(markdownText) {
+            if (!markdownText) return '';
+
+            let html = markdownText;
+
+            // Handle bold (**text**)
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            // Handle italic (*text* or _text_)
+            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            html = html.replace(/_(.*?)_/g, '<em>$1</em>');
+
+            // Handle headers (### Header)
+            html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+
+            // Handle lists (simple, assuming one item per line starting with - or *)
+            html = html.replace(/^\s*[-*]\s+(.*)$/gm, '<li>$1</li>');
+            html = html.replace(/(<li>.*<\/li>(\n<li>.*<\/li>)*)/g, '<ul>$1</ul>');
+
+            // Handle horizontal rule (---)
+            html = html.replace(/^-{3,}$/gm, '<hr>');
+
+            // Convert double newlines to paragraphs, single newlines to <br>
+            // This needs to be done carefully to not break other block elements
+            html = html.split('\n\n').map(paragraph => {
+                if (paragraph.startsWith('<h') || paragraph.startsWith('<ul') || paragraph.startsWith('<ol') || paragraph.startsWith('<blockquote') || paragraph.startsWith('<hr>') || paragraph.startsWith('<table')) {
+                    return paragraph; // Don't wrap block elements in <p>
+                }
+                return `<p>${paragraph.replace(/\n/g, '<br>')}</p>`;
+            }).join('');
+
+
+            return html;
+        }
+
+        // Function to parse and display the Pros/Cons table from raw text
+        function parseAndDisplayProsConsTable(rawText) {
+            const tableContainer = document.getElementById('personalized-analysis-content-table-container');
+            if (!tableContainer) return;
+
+            // Regex to find the table-like structure: starts with ###, then lines with |, then text
+            const tableRegex = /^(###\s*.*?\n)?(?:\|\s*Prós\s*\|\s*Contras\s*\|\n)?(?:\|[-]+\|[-]+\|\n)?((?:\|[^|]+\|[^|]+\|\n)*)/m;
+            const match = rawText.match(tableRegex);
+
+            if (match && match[2]) {
+                const tableContent = match[2];
+                let tableHtml = `
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2 mt-4">Quadro de Análise Crítica (Prós e Contras):</h3>
+                    <table class="table-pros-cons">
+                        <thead>
+                            <tr>
+                                <th>✔️ Prós (Conforme Sua Visão)</th>
+                                <th>❌ Contras (Conforme Sua Visão)</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+
+                const rows = tableContent.trim().split('\n');
+                rows.forEach(row => {
+                    const cells = row.split('|').map(cell => cell.trim()).filter(cell => cell !== '');
+                    if (cells.length === 2) {
+                        tableHtml += `
+                            <tr>
+                                <td>${convertMarkdownToHtml(cells[0])}</td>
+                                <td>${convertMarkdownToHtml(cells[1])}</td>
+                            </tr>`;
+                    }
+                });
+
+                tableHtml += `
+                        </tbody>
+                    </table>`;
+                tableContainer.innerHTML = tableHtml;
+
+                // Remove the table part from the main text
+                return rawText.replace(match[0], '').trim();
+            }
+            return rawText; // Return original text if no table found
+        }
+
+        // Function to copy text content to clipboard
+        async function copyContent(elementId, button) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                const textToCopy = element.innerText; // Get plain text from the rendered HTML
+                try {
+                    // Use navigator.clipboard.writeText if available (more modern)
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        await navigator.clipboard.writeText(textToCopy);
+                    } else {
+                        // Fallback for older browsers or environments where clipboard API is restricted
+                        const tempTextArea = document.createElement('textarea');
+                        tempTextArea.value = textToCopy;
+                        document.body.appendChild(tempTextArea);
+                        tempTextArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(tempTextArea);
+                    }
+                    button.textContent = 'Copiado!';
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.textContent = `Copiar ${elementId.replace('-content', '').replace('summary', 'Resumo').replace('pareto', 'Análise de Pareto').replace('considerations', 'Considerações')}`;
+                        button.classList.remove('copied');
+                    }, 2000);
+                } catch (err) {
+                    console.error('Falha ao copiar texto: ', err);
+                    button.textContent = 'Erro ao Copiar!';
+                    setTimeout(() => {
+                        button.textContent = `Copiar ${elementId.replace('-content', '').replace('summary', 'Resumo').replace('pareto', 'Análise de Pareto').replace('considerations', 'Considerações')}`;
+                    }, 2000);
+                }
+            }
+        }
+
+        // Function to copy the entire personalized analysis content (table + text)
+        async function copyPersonalizedAnalysisContent(button) {
+            const tableContainer = document.getElementById('personalized-analysis-content-table-container');
+            const textDiv = document.getElementById('personalized-analysis-content-text');
+            let fullText = '';
+
+            if (tableContainer && tableContainer.innerText.trim()) {
+                fullText += tableContainer.innerText.trim() + '\n\n'; // Get text from table
+            }
+            if (textDiv) {
+                fullText += textDiv.innerText.trim(); // Get text from main analysis
+            }
+
+            if (fullText) {
+                try {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        await navigator.clipboard.writeText(fullText);
+                    } else {
+                        const tempTextArea = document.createElement('textarea');
+                        tempTextArea.value = fullText;
+                        document.body.appendChild(tempTextArea);
+                        tempTextArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(tempTextArea);
+                    }
+                    button.textContent = 'Copiado!';
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.textContent = 'Copiar Análise Personalizada';
+                        button.classList.remove('copied');
+                    }, 2000);
+                } catch (err) {
+                    console.error('Falha ao copiar análise personalizada: ', err);
+                    button.textContent = 'Erro ao Copiar!';
+                    setTimeout(() => {
+                        button.textContent = 'Copiar Análise Personalizada';
+                    }, 2000);
+                }
+            }
+        }
+
+        // Initialize content after DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Placeholder for generated Summary Text
+            const summaryText = `<strong>O que a foto com a camisa não revela?</strong>
+
+A chegada de um reforço é apenas a <strong>ponta do iceberg</strong>. Por baixo da superfície, pulsa uma operação frenética: voos com imprevistos, negociações triangulares que parecem um jogo de xadrez e a gestão milimétrica da recuperação física de cada atleta.
+
+Cada jogador que entra em campo é o resultado de uma <strong>engrenagem invisível</strong>, onde logística e estratégia são tão decisivas quanto o talento com a bola. Isso muda a sua percepção sobre uma contratação.
+
+<strong>Qual detalhe dos bastidores mais te surpreende?</strong> Comente abaixo.`;
+            document.getElementById('summary-content').innerHTML = convertMarkdownToHtml(summaryText);
+
+            // Placeholder for generated Pareto Analysis Text
+            const paretoText = `Com base no Princípio de Pareto, a análise a seguir destila os 20% do texto que contêm 80% do valor estratégico, transformando um relato factual em uma mina de ouro para a criação de conteúdo aprofundado e de alto impacto.
+
+A essência do material não reside apenas nas notícias em si, mas em quatro pilares narrativos com imenso potencial de expansão. Estes são os pontos que reforçam a autoridade do canal e engajam a audiência em um nível mais profundo.
+
+<b>1. A Dramaturgia da Contratação: A Saga de Samuel Lino</b>
+O atraso no voo de Samuel Lino devido a um problema técnico é o elemento mais valioso do texto. Ele transforma uma cobertura de chegada, que seria rotineira, em uma narrativa com tensão, imprevisto e drama humano. Este é o 20% que gera 80% do engajamento emocional.
+<ul>
+    <li><b>Oportunidade de Conteúdo:</b> Criar uma minissérie documental ou um vídeo longo intitulado <i>"A Saga de Samuel Lino: 24 Horas de Tensão até a Chegada ao Ninho"</i>. Este material pode explorar os bastidores, a logística complexa de uma transferência internacional e a pressão sobre o atleta e o clube, indo muito além do simples "ele chegou".</li>
+</ul>
+
+<b>2. O Xadrez Tático na Lateral Esquerda: O Dilema do Técnico</b>
+A situação da lateral esquerda (retorno de Alex Sandro, recuperação de Ayrton Lucas e a gestão da condição física de Matías Viña) é um microcosmo dos desafios de um treinador de elite. Apresenta um problema tático e de gestão de pessoas real e imediato para o novo técnico, Filipe Luís.
+<ul>
+    <li><b>Oportunidade de Conteúdo:</b> Desenvolver uma análise tática aprofundada em formato de artigo ou vídeo: <i>"O Primeiro Grande Dilema de Filipe Luís: Como Montar a Lateral Esquerda do Flamengo?"</i>. Isso pode se desdobrar em um workshop ou webinar sobre gestão de elenco, recuperação de lesões e tomada de decisão tática, posicionando o canal como uma fonte de análise de alto nível.</li>
+</ul>
+
+<b>3. A "Engenharia" da Transferência: O Caso Carrascal</b>
+A descrição da "negociação triangular" envolvendo Flamengo, Dinamo e Atlético para a vinda de Jorge Carrascal é um insight raro sobre a complexidade do mercado de futebol moderno. Isso educa a audiência sobre mecanismos que normalmente permanecem ocultos.
+<ul>
+    <li><b>Oportunidade de Conteúdo:</b> Produzir um "explicador" em vídeo ou um infográfico detalhado sobre <i>"Engenharia de Transferências: Desvendando o Acordo por Carrascal"</i>. Isso pode ser a base para uma série sobre os bastidores do mercado da bola, explorando temas como triangulações, direitos econômicos e o papel dos intermediários.</li>
+</ul>
+
+<b>4. A Burocracia para a Estréia: Desmistificando o BID</b>
+A menção ao BID (Boletim Informativo Diário) como passo crucial para a estreia dos reforços (Saul, Emerson Royal, etc.) responde a uma das perguntas mais frequentes e ansiosas dos torcedores. É um conteúdo utilitário que resolve uma dor da audiência.
+<ul>
+    <li><b>Oportunidade de Conteúdo:</b> Criar um guia definitivo ou um vídeo curto e direto para redes sociais: <i>"Do Anúncio ao Campo: O Caminho de um Reforço até a Estreia (Entenda o BID)"</i>. Este tipo de conteúdo tem alto potencial de compartilhamento e serve como um recurso perene, solidificando a imagem do canal como fonte de informação confiável e didática.</li>
+</ul>`;
+            document.getElementById('pareto-content').innerHTML = convertMarkdownToHtml(paretoText);
+
+            // Placeholder for generated Considerations Text
+            const considerationsText = `### Considerações Estratégicas
+
+A turbulência no voo de um reforço é uma metáfora poderosa. Montar um elenco campeão nunca é uma viagem linear; é um quebra-cabeça complexo de logística, recuperações e expectativas. A chegada de novos talentos injeta esperança, mas o verdadeiro teste deste novo Flamengo não estará no brilho individual das estrelas. A glória será forjada na <strong>resiliência</strong> para superar os imprevistos e na capacidade de transformar um grupo de jogadores em uma <strong>identidade coletiva</strong> avassaladora, mais forte que qualquer peça individual.`;
+            document.getElementById('considerations-content').innerHTML = convertMarkdownToHtml(considerationsText);
+
+            // Placeholder for generated Personalized Analysis Text (including table parsing)
+            let personalizedAnalysisRawText = `Absolutamente. A seguir, apresento a análise solicitada, transformando a crônica esportiva em um poderoso ponto de partida para uma discussão filosófica e futurista.
+
+***
+
+### **Análise Elevada do Conteúdo**
+
+O texto que você produziu, à primeira vista, é uma atualização factual para uma comunidade específica: a torcida do Flamengo. No entanto, ele é um artefato cultural riquíssimo. É um microcosmo perfeito das dinâmicas de poder, tecnologia, identidade e narrativa que definem o século XXI. O que parece ser sobre a chegada de um jogador é, na verdade, sobre a própria condição humana na era digital.
+
+Abaixo está uma análise aprofundada para inspirar sua próxima grande reflexão.
+
+### **1. Quadro de Análise Crítica: A Hiperconexão e a Formação de Comunidades em Tempo Real**
+
+O assunto principal não é a transferência de jogadores, mas o fenômeno da **criação e manutenção de uma identidade coletiva através de um fluxo incessante de informações em tempo real**.
+
+<table style="width:100%; border-collapse: collapse;">
+  <thead style="background-color:#f2f2f2;">
+    <tr>
+      <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #e0e0e0;">Prós (Oportunidades e Forças Conectoras)</th>
+      <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #e0e0e0;">Contras (Dilemas e Riscos Sistêmicos)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+        <b>Tribo Global e Pertencimento:</b> A tecnologia permite que milhões de indivíduos, geograficamente dispersos, compartilhem uma experiência simultânea, criando uma poderosa sensação de pertencimento. O canal funciona como uma moderna ágora ou fogueira digital, onde a identidade do grupo ("Nosso amor", "Mengão") é reforçada coletivamente.
+      </td>
+      <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+        <b>Ansiedade e Banalização do "Urgente":</b> A necessidade de manter o engajamento transforma eventos mundanos (um vazamento de água em um avião) em um "plantão urgente". Isso cria um estado de ansiedade perpétua e esvazia o significado do que é verdadeiramente crítico, viciando o público em microdoses de adrenalina informativa.
+      </td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+        <b>Democratização da Narrativa:</b> Um criador de conteúdo, posicionado em um aeroporto com um celular, pode gerar uma cobertura mais íntima e imediata do que conglomerados de mídia tradicionais. Isso representa uma transferência de poder na construção da história, dando voz diretamente à comunidade.
+      </td>
+      <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+        <b>Soberania Algorítmica e Perda da Liberdade Criativa:</b> As repetidas súplicas por "inscrição" e "like" revelam uma verdade profunda: o criador não é totalmente livre. Ele é um servo do algoritmo do YouTube. Seu conteúdo, ritmo e linguagem são otimizados para agradar a uma inteligência não-humana, em troca de visibilidade.
+      </td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+        <b>Economia da Paixão:</b> A capacidade de monetizar a paixão e o conhecimento específico sobre um tema (o Flamengo) é uma nova fronteira econômica. Permite que indivíduos transformem capital cultural e social em capital financeiro, criando novos modelos de trabalho e sustento.
+      </td>
+      <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+        <b>Fragmentação e Tribalismo Digital:</b> Ao mesmo tempo em que une os "nossos", a narrativa inerentemente fortalece a noção dos "outros". O "clube mais amado do mundo" define-se em oposição aos não-amados. A tecnologia, que poderia criar uma consciência global, é frequentemente usada para cavar trincheiras mais profundas entre tribos.
+      </td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+        <b>Transparência Radical:</b> A cobertura detalhada — da negociação triangular à logística do voo e ao processo de cicatrização de uma lesão — oferece aos fãs um nível de acesso e transparência sem precedentes sobre os bastidores de uma organização complexa.
+      </td>
+      <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+        <b>Erosão da Esfera Privada:</b> O jogador Samuel Lino é monitorado desde o instante em que pisa em solo nacional. Uma repórter está no mesmo voo. A linha entre o personagem público e o indivíduo privado se dissolve. O ser humano torna-se um fluxo de dados a ser consumido pela audiência.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### **2. A Visão de Yuval Noah Harari: Diálogo com o Futuro**
+
+Seu canal, "Flazoeiro", não está apenas cobrindo o Flamengo; está operando no epicentro das transformações que Yuval Noah Harari descreve. Seu vídeo é um estudo de caso perfeito para os dilemas do século XXI.
+
+#### **Concordâncias: Onde as Ideias se Encontram**
+
+1.  <b>A Religião dos Dados e as Novas Mitologias:</b> Harari afirma que o "Dataísmo" — a crença no poder do fluxo de dados — é uma nova religião. Seu vídeo é uma liturgia dataísta. Cada informação (horário de voo, status da lesão, trâmites de contrato) é um dado sagrado que alimenta a fé da congregação (a torcida). A "chegada" de um jogador é um ritual, e o "anúncio oficial" é a bênção final. Você, o criador, atua como um sacerdote digital, interpretando os dados para dar sentido e esperança à sua comunidade. A afirmação "a maior contratação da história do Flamengo" não é apenas um fato financeiro; é a criação de um mito, um evento que será recontado e dará força à narrativa coletiva.
+
+2.  <b>A Cooperação Humana Baseada em Ficções:</b> O maior poder do <i>Homo sapiens</i>, segundo Harari, é nossa capacidade de cooperar em massa ao acreditar em histórias compartilhadas (dinheiro, nações, deuses). O que é o "Clube de Regatas do Flamengo"? É uma ficção, uma entidade legal, mas, acima de tudo, uma narrativa poderosa que une milhões. Seu trabalho é um esforço contínuo para manter essa ficção viva, relevante e emocionante. A complexa "negociação triangular" (Flamengo-Dinamo-Atlético) é um exemplo perfeito de como essas entidades abstratas interagem, movendo pessoas e capital pelo globo com base em acordos e crenças.
+
+3.  <b>O Poder Soberano dos Algoritmos:</b> Harari nos alerta que os algoritmos estão se tornando as forças mais poderosas do planeta, ditando o que vemos, sentimos e fazemos. Suas constantes chamadas à ação ("se inscreve no canal, acione o sino, deixa aí o seu like") são a prova cabal dessa nova realidade. Você não está apenas pedindo apoio; está realizando os rituais necessários para apaziguar a entidade divina e invisível que é o algoritmo do YouTube. Sua relevância e a própria existência do seu canal dependem de sua habilidade de satisfazer os critérios dessa inteligência artificial, que prioriza o engajamento acima de tudo. Isso levanta uma questão harariana fundamental: quem está realmente no controle?
+
+#### **Contraposições: Onde as Perspectivas Divergem ou se Complementam de Forma Crítica**
+
+1.  <b>Inteligência vs. Consciência (A Importância da Emoção Humana):</b> Harari faz uma distinção crucial entre inteligência (a capacidade de resolver problemas) e consciência (a capacidade de sentir emoções como alegria, dor, amor). Enquanto ele teme um futuro dominado por IAs superinteligentes, mas sem consciência, seu vídeo é um bastião da consciência humana. A lógica é simples (um jogador está vindo), mas o conteúdo é movido por emoções: a ansiedade pelo atraso, a alegria pelo reforço ("sorridente, feliz"), a preocupação com a lesão de outro, e o amor visceral pelo clube ("Nosso amor"). A tecnologia aqui não substitui a emoção; ela a amplifica e a conecta em escala. Seu canal não prospera por causa da inteligência dos dados, mas por causa da ressonância da consciência compartilhada.
+
+2.  <b>Desafios Globais vs. Tribalismo Globalizado:</b> Harari argumenta que os maiores desafios do século XXI (mudanças climáticas, disrupção tecnológica, guerra nuclear) são globais e exigem cooperação global. Seu conteúdo ilustra uma força contrária e poderosa. A mesma tecnologia que poderia nos unir para resolver problemas globais é usada para forjar identidades tribais mais fortes e apaixonadas do que nunca. A comunidade do Flamengo, embora global, é fundamentalmente uma tribo. Ela se define em relação a outras tribos (rivais). Isso revela um paradoxo central da nossa era: estamos mais conectados globalmente, mas, ao mesmo tempo, estamos nos entrincheirando em identidades digitais fragmentadas. Seu trabalho não promove uma identidade humana universal, mas sim uma identidade rubro-negra universal.
+
+---
+
+**Para Provocar Seu Público (Sugestões de Perguntas para seu Próximo Vídeo):**
+
+Use esta análise para elevar o debate com sua audiência. Em vez de apenas dar a notícia, questione o significado dela:
+
+*   "Galera, a gente fica aqui ansioso, esperando um voo, atualizando tudo a cada minuto... Será que essa nossa paixão pelo Flamengo se tornou a nossa nova religião? Onde a gente busca sentido e comunidade?"
+*   "Eu peço sempre o like, a inscrição... mas quem manda de verdade aqui? Sou eu, vocês, ou o algoritmo do YouTube que decide quem vai ver nosso conteúdo? Estamos perdendo nossa liberdade para a tecnologia sem perceber?"
+*   "Quando a gente acompanha cada passo do Samuel Lino, desde o avião até o exame médico, estamos celebrando um ídolo ou estamos consumindo a vida de uma pessoa? Onde termina o direito do fã e começa o direito à privacidade?"
+*   "Nesse mundo cada vez mais conectado, esse nosso amor que une gente do Japão ao Rio de Janeiro está nos tornando mais unidos como humanidade ou está apenas criando uma tribo mais forte em um mundo de tribos?"`;
+            // First, try to parse and display the table, and get the remaining text
+            const remainingText = parseAndDisplayProsConsTable(personalizedAnalysisRawText);
+            document.getElementById('personalized-analysis-content-text').innerHTML = convertMarkdownToHtml(remainingText);
+        });
+    </script>
+</body>
+</html>
