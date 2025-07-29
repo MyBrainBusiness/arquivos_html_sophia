@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOPHIA: Seu Kit de Conteúdo</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Very light gray */
+            color: #334155; /* Slate 700 */
+        }
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif; /* A more impactful font for headings */
+            font-weight: 700;
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); /* Indigo to Violet */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .content-section {
+            background-color: #ffffff;
+            border-radius: 1.5rem; /* More rounded */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            height: 360px; /* Increased height by 30px from 330px to 360px */
+            overflow: hidden; /* Hide overflow initially */
+        }
+        .content-scrollable {
+            flex-grow: 1;
+            overflow-y: auto; /* Vertical scrollbar */
+            padding-right: 0.5rem; /* Space for scrollbar */
+        }
+        /* Custom scrollbar for Webkit browsers */
+        .content-scrollable::-webkit-scrollbar {
+            width: 8px;
+        }
+        .content-scrollable::-webkit-scrollbar-track {
+            background: #f1f5f9; /* Light background for track */
+            border-radius: 10px;
+        }
+        .content-scrollable::-webkit-scrollbar-thumb {
+            background: #cbd5e1; /* Gray thumb */
+            border-radius: 10px;
+        }
+        .content-scrollable::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; /* Darker gray on hover */
+        }
+
+        .copy-button {
+            /* Updated button style to match CTA more closely */
+            @apply mt-6 py-4 px-10 font-semibold rounded-full shadow-xl transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-opacity-75;
+            background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%); /* Indigo to Violet gradient */
+            color: white;
+            align-self: flex-end; /* Align button to the right within the flex column */
+        }
+        .copy-button.copied {
+            background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%); /* Green gradient for copied */
+        }
+        .table-pros-cons {
+            width: 100%;
+            border-collapse: separate; /* Allows border-radius on cells */
+            border-spacing: 0; /* Remove space between cell borders */
+            margin-top: 1.5rem;
+            overflow: hidden; /* Ensures rounded corners on table */
+            border-radius: 0.75rem; /* Rounded corners for the table itself */
+        }
+        .table-pros-cons th, .table-pros-cons td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0; /* Light border */
+        }
+        .table-pros-cons th {
+            background-color: #eef2ff; /* Light indigo background */
+            font-weight: 600;
+            color: #4338ca; /* Indigo 700 */
+            text-transform: uppercase;
+            font-size: 0.875rem;
+        }
+        .table-pros-cons tbody tr:last-child td {
+            border-bottom: none; /* No border on last row */
+        }
+        .table-pros-cons tbody tr:nth-child(even) {
+            background-color: #f8fafc; /* Alternate row color */
+        }
+        .table-pros-cons tbody tr:hover {
+            background-color: #eff6ff; /* Light blue on hover */
+        }
+        .table-pros-cons td:first-child {
+            border-left: none; /* No left border for first column */
+        }
+        .table-pros-cons td:last-child {
+            border-right: none; /* No right border for last column */
+        }
+
+        /* Basic Markdown to HTML conversion */
+        .markdown-content h1 { font-size: 2.25rem; font-weight: 800; margin-bottom: 1rem; }
+        .markdown-content h2 { font-size: 1.875rem; font-weight: 800; margin-bottom: 0.75rem; }
+        .markdown-content h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .markdown-content strong { font-weight: 700; }
+        .markdown-content em { font-style: italic; }
+        .markdown-content ul { list-style-type: disc; margin-left: 1.25rem; }
+        .markdown-content ol { list-style-type: decimal; margin-left: 1.25rem; }
+        .markdown-content li { margin-bottom: 0.25rem; }
+        .markdown-content p { margin-bottom: 0.75rem; line-height: 1.6; }
+        .markdown-content blockquote { border-left: 4px solid #cbd5e1; padding-left: 1rem; margin-left: 0; color: #64748b; }
+        .markdown-content pre { background-color: #f1f5f9; padding: 0.75rem; border-radius: 0.5rem; overflow-x: auto; }
+        .markdown-content code { font-family: monospace; background-color: #e2e8f0; padding: 0.2em 0.4em; border-radius: 0.25rem; }
+        .markdown-content hr { border: none; border-top: 1px solid #e2e8f0; margin: 1.5rem 0; }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="gradient-header py-12 px-4 sm:px-6 lg:px-8 text-white text-center rounded-b-3xl">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-2">
+            ✨ Seu Kit de Conteúdo SOPHIA! ✨
+        </h1>
+        <p class="text-lg sm:text-xl font-light opacity-90">
+            Seu material exclusivo, gerado com inteligência e pronto para brilhar.
+        </p>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- Section 1: Resumo Estratégico -->
+        <section class="content-section">
+            <h2 class="text-2xl text-indigo-700 mb-4 flex items-center">
+                <span class="mr-2">📝</span> A BRILHANTE IDEIA
+            </h2>
+            <p class="text-gray-500 text-sm mb-4 italic">
+                Sua próxima postagem, pronta para cativar.
+            </p>
+            <div id="summary-content" class="content-scrollable text-base markdown-content">
+                <!-- Placeholder for generated Summary Text -->
+                <b>O silêncio mais caro do mundo?</b>
+
+Entre Lula e Trump, uma ligação virou um jogo de xadrez geopolítico. De um lado, a pressão por tarifas. Do outro, a tática de forçar o primeiro movimento. Não se trata apenas de diplomacia, mas de poder.
+
+A recusa em pegar o telefone é orgulho ferido, teimosia ou uma estratégia calculada para não demonstrar fraqueza? Uma única chamada poderia mudar tudo, mas o custo simbólico de quem cede primeiro parece ser o maior obstáculo.
+
+<b>Na sua opinião: é uma demonstração de força ou um erro estratégico?</b> Comente aqui.
+            </div>
+            <button class="copy-button" onclick="copyContent('summary-content', this)">Copiar Resumo</button>
+        </section>
+
+        <!-- Section 2: Análise de Pareto 80/20 -->
+        <section class="content-section">
+            <h2 class="text-2xl text-purple-700 mb-4 flex items-center">
+                <span class="mr-2">🧠</span> A MINA DE OURO
+            </h2>
+            <p class="text-gray-500 text-sm mb-4 italic">
+                Insights cruciais para aprofundar seu conteúdo.
+            </p>
+            <div id="pareto-content" class="content-scrollable text-base markdown-content">
+                <!-- Placeholder for generated Pareto Analysis Text -->
+                A análise do cenário diplomático entre os presidentes Lula e Trump revela um núcleo estratégico que transcende a mera disputa tarifária. Aplicando o Princípio de Pareto, os 20% de informações vitais que concentram 80% do valor e do potencial de conteúdo residem não nos eventos diários, mas na complexa teia de psicologia, estratégia e pressões políticas que definem o impasse.
+
+Esta é a mina de ouro para a criação de conteúdo aprofundado:
+
+<b>1. O Jogo de Poder Pessoal: A Diplomacia do Ego como Ferramenta de Coerção</b>
+A essência do conflito não são as tarifas, mas a recusa de Lula em fazer o primeiro contato telefônico direto com Trump. As tarifas são a alavanca de Trump para forçar uma concessão simbólica: a submissão de Lula em procurá-lo. Este é o ponto nevrálgico da narrativa.
+<ul>
+    <li><b>Potencial de Conteúdo:</b>
+        <ul>
+            <li><b>Webinar/Workshop:</b> "A Psicologia da Negociação de Alto Nível: Quando o Ego Define a Geopolítica". Análise de casos históricos em que a personalidade de líderes moldou resultados internacionais.</li>
+            <li><b>Artigo Aprofundado:</b> "A Tática do 'Primeiro Contato': Como Líderes Usam o Silêncio e a Espera como Armas Estratégicas".</li>
+            <li><b>Série de Vídeos:</b> Explorar as táticas de negociação de Trump versus a abordagem diplomática tradicional, usando este caso como peça central.</li>
+        </ul>
+    </li>
+</ul>
+
+<b>2. A Tensão Interna: Pragmatismo Econômico vs. Soberania Política</b>
+O texto expõe uma fissura crucial dentro do governo brasileiro: auxiliares que pressionam por uma solução pragmática (o telefonema para resolver a questão tarifária) contra a postura de Lula, que parece defender um princípio de soberania e não ceder à pressão externa. Este dilema interno é um microcosmo de um desafio comum na política externa.
+<ul>
+    <li><b>Potencial de Conteúdo:</b>
+        <ul>
+            <li><b>Painel de Debate:</b> Convidar analistas políticos e ex-diplomatas para discutir o tema: "Até que ponto um líder deve sacrificar um princípio de soberania em nome de um benefício econômico imediato?".</li>
+            <li><b>Estudo de Caso (E-book):</b> "O Dilema do Planalto: Uma Análise da Tomada de Decisão sob Pressão Dupla – Interna e Externa".</li>
+        </ul>
+    </li>
+</ul>
+
+<b>3. O Histórico como Arma e Vulnerabilidade</b>
+A narrativa habilmente contrapõe as ações de Lula (reconhecimento imediato de Trump, envio de carta) com a postura de Bolsonaro em relação a Biden. Isso é usado para construir a imagem de Lula como um diplomata mais ágil. No entanto, o seu apoio anterior à oponente de Trump (Kamala Harris) é uma vulnerabilidade subjacente que adiciona uma camada de animosidade pessoal ao impasse, tornando-o mais complexo do que uma simples questão de Estado.
+<ul>
+    <li><b>Potencial de Conteúdo:</b>
+        <ul>
+            <li><b>Infográfico Interativo/Timeline:</b> "Cronologia de uma Crise: Ações, Reações e Omissões na Relação Lula-Trump", destacando os pontos de inflexão e o contexto histórico.</li>
+            <li><b>Podcast Analítico:</b> "Fantasmas do Passado: Como Alianças e Declarações Anteriores Assombram as Relações Diplomáticas Atuais".</li>
+        </ul>
+    </li>
+</ul>
+
+Esses três pilares representam o coração pulsante da questão. Explorá-los permite ir além da notícia superficial, oferecendo ao público uma análise rica que reforça a autoridade, demonstra profundidade estratégica e abre portas para um ecossistema de conteúdo relevante e de alto impacto.
+            </div>
+            <button class="copy-button" onclick="copyContent('pareto-content', this)">Copiar Análise de Pareto</button>
+        </section>
+
+        <!-- Section 3: Considerações Estratégicas -->
+        <section class="content-section">
+            <h2 class="text-2xl text-pink-700 mb-4 flex items-center">
+                <span class="mr-2">💡</span> O TOQUE DE SABEDORIA
+            </h2>
+            <p class="text-gray-500 text-sm mb-4 italic">
+                Uma conclusão poderosa para deixar sua marca.
+            </p>
+            <div id="considerations-content" class="content-scrollable text-base markdown-content">
+                <!-- Placeholder for generated Considerations Text -->
+                Na complexa arena da geopolítica, o silêncio de um telefonema é, em si, uma poderosa declaração. O impasse atual não é apenas uma disputa de egos, mas um xadrez estratégico onde o custo da inação recai sobre a economia e as relações futuras. A verdadeira liderança não se mede por quem inicia o contato, mas por quem tem a visão de priorizar o interesse nacional acima do precedente pessoal. A decisão de romper este silêncio definirá se a diplomacia brasileira será guiada pelo <b>pragmatismo que gera resultados</b> ou pelo <b>orgulho que gera impasses</b>.
+            </div>
+            <button class="copy-button" onclick="copyContent('considerations-content', this)">Copiar Considerações</button>
+        </section>
+
+        <!-- Section 4: Análise Crítica Personalizada -->
+        <section class="content-section">
+            <h2 class="text-2xl text-teal-700 mb-4 flex items-center">
+                <span class="mr-2">🔭</span> SUA VISÃO DO FUTURO
+            </h2>
+            <p class="text-gray-500 text-sm mb-4 italic">
+                Análises que refletem o SEU pensamento único.
+            </p>
+            <div class="content-scrollable text-base markdown-content">
+                <div id="personalized-analysis-content-table-container">
+                    <!-- Table will be inserted here by JavaScript -->
+                </div>
+                <div id="personalized-analysis-content-text" class="mt-4">
+                    <!-- Placeholder for generated Personalized Analysis Text -->
+                    Com certeza. Eis a análise aprofundada, estruturada para transformar a notícia em uma reflexão filosófica e futurista.
+
+***
+
+### <strong>Análise Elevada: Da Crise Diplomática à Encruzilhada da Humanidade</strong>
+
+O episódio diplomático entre os presidentes Lula e Trump, centrado na hesitação de um telefonema, transcende a mera notícia política. Ele serve como um microcosmo perfeito para dissecarmos as tensões fundamentais do século XXI: o embate entre a personalidade e a instituição, a erosão das narrativas que nos uniam e o poder invisível dos novos sistemas tecnológicos que medeiam nossas relações.
+
+O que parece ser um impasse sobre tarifas é, na verdade, um palco onde se desenrola o futuro da governança, da identidade nacional e da própria natureza do poder.
+
+### <strong>1. Quadro de Análise Crítica: A Diplomacia na Era da Personalização</strong>
+
+<table border="1" style="width:100%; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th style="padding: 10px; background-color: #f2f2f2; text-align: left;"><strong>PRÓS (Oportunidades e Forças Emergentes)</strong></th>
+            <th style="padding: 10px; background-color: #f2f2f2; text-align: left;"><strong>CONTRAS (Dilemas e Fragilidades Expostas)</strong></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="padding: 10px; vertical-align: top;">
+                <strong>Realismo Pragmático:</strong> A pressão interna para que Lula realize o telefonema evidencia que, no limite, os interesses econômicos e estratégicos de uma nação (tarifas) tendem a se sobrepor a posturas ideológicas ou ressentimentos pessoais. Uma lição sobre a primazia da realpolitik na governança.
+            </td>
+            <td style="padding: 10px; vertical-align: top;">
+                <strong>A Hiper-Personalização do Poder:</strong> A estabilidade das relações globais torna-se refém dos egos, da história pessoal e do temperamento de líderes individuais. Instituições centenárias são subjugadas pela "química" (ou a falta dela) entre duas pessoas, expondo uma fragilidade sistêmica.
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; vertical-align: top;">
+                <strong>Transparência Radical (Não Intencional):</strong> A menção a tuítes e declarações passadas mostra como a tecnologia criou um arquivo público e permanente da diplomacia. Cada ato e palavra são registrados e podem ser usados como arma ou ferramenta, forçando um novo nível de responsabilidade (e vulnerabilidade).
+            </td>
+            <td style="padding: 10px; vertical-align: top;">
+                <strong>Diplomacia como Performance:</strong> O ato de "não telefonar" ou de "forçar o outro a procurar" transforma a política externa em um espetáculo para o público interno e externo. O foco se desloca da resolução de problemas para a gestão de imagem e a projeção de força, muitas vezes com resultados contraproducentes.
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; vertical-align: top;">
+                <strong>Sofisticação dos Canais Secundários:</strong> A menção a chanceleres, assessores e conversas de bastidores revela a resiliência do corpo diplomático profissional. Enquanto os líderes performam no palco principal, a máquina estatal trabalha nos bastidores para mitigar os danos e construir pontes, garantindo a continuidade.
+            </td>
+            <td style="padding: 10px; vertical-align: top;">
+                <strong>Erosão da Soberania Decisória:</strong> O líder, que deveria ser o soberano, mostra-se reativo, acuado por pressões da mídia, de opositores e da opinião pública digital. A dúvida sobre "se o presidente americano atenderia" revela uma inversão de poder, onde o medo da humilhação pública paralisa a ação estratégica.
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+### <strong>2. A Visão de Yuval Noah Harari: Diálogo com o Futuro</strong>
+
+Analisar este impasse pela lente de Yuval Noah Harari é como usar um microscópio de alta potência: o que era um simples conflito revela-se um sintoma de transformações profundas na condição humana. O telefonema que não acontece é um eco das grandes questões que Harari levanta sobre nosso futuro.
+
+#### <strong>Onde as Ideias se Encontram (Concordâncias)</strong>
+
+1.  <strong>A Diplomacia como <em>Ficção Coletiva</em>:</strong> Harari argumenta que a humanidade coopera através de histórias compartilhadas — nações, dinheiro, leis. O texto é a prova viva disso. O telefonema não é apenas uma conversa; é um símbolo, um ritual que reafirma uma narrativa de respeito, poder e hierarquia. A recusa em participar deste ritual é uma tentativa de reescrever a história da relação Brasil-EUA. A "dificuldade de agenda" ou a "saída às pressas do G7" são justificativas, novas ficções criadas para sustentar a narrativa desejada por cada lado. Estamos assistindo a uma guerra de narrativas em tempo real, onde o controle da história é o verdadeiro prêmio.
+
+2.  <strong>O Hackeamento do Estadista:</strong> Harari alerta que, com big data e biotecnologia, será possível "hackear" seres humanos, explorando seus vieses e emoções. Este cenário diplomático mostra uma versão analógica e política desse hackeamento. A estratégia de Trump de "bloquear as negociações" para forçar o contato é um hackeamento psicológico. Ele explora o dilema de Lula entre o orgulho pessoal e a pressão nacional. As referências ao apoio passado de Bolsonaro a Trump e de Lula a Kamala Harris demonstram como o sistema nervoso político dos líderes está exposto, com suas "preferências" e "lealdades" passadas sendo usadas como dados para prever e manipular seu comportamento futuro.
+
+3.  <strong>Dados são o Novo Poder:</strong> A importância dada ao reconhecimento imediato da vitória de Trump por Lula nas redes sociais e ao envio de uma carta que não foi respondida ilustra uma verdade harariana: no século XXI, a geração e o controle de dados (mesmo um simples tuíte) são atos de poder. O reconhecimento público é um dado que entra na ledger global. A ausência de uma resposta (um "retorno" de dados) é, em si, uma poderosa mensagem de desdém. O poder não está mais apenas nos exércitos ou na economia, mas na capacidade de controlar o fluxo de informação e reconhecimento.
+
+#### <strong>Onde as Perspectivas Divergem ou se Complementam (Contraposições Críticas)</strong>
+
+1.  <strong>Agência Humana vs. Determinismo Algorítmico:</strong> O texto ainda enquadra a situação como um drama de escolhas humanas conscientes. Lula "rejeita", "avalia", "é aconselhado". Harari, por outro lado, nos levaria a questionar a profundidade dessa agência. Ele argumentaria que as "escolhas" desses líderes são cada vez mais o resultado de complexos algoritmos invisíveis: não apenas os das redes sociais que moldam a opinião pública, mas os algoritmos econômicos que calculam o impacto das tarifas e os algoritmos políticos internos que medem o custo de cada ação. O texto foca no <em>ator</em>; Harari focaria no <em>sistema</em> que formata e limita as ações do ator. A perspectiva de Harari não contradiz o texto, mas a aprofunda, sugerindo que os líderes talvez sejam menos mestres de seu destino e mais interfaces de forças sistêmicas que mal compreendem.
+
+2.  <strong>O Foco no Indivíduo vs. a Ameaça à Cooperação Global:</strong> A narrativa jornalística, por sua natureza, concentra-se nos protagonistas: Lula, Trump, Vieira. É uma história de homens. Harari nos forçaria a um zoom out radical. Para ele, o perigo real não é se Lula vai ou não telefonar para Trump. O perigo é que este episódio exemplifica o colapso da narrativa liberal que sustentou a cooperação global por 70 anos — a crença em instituições multilaterais, no diálogo e em regras universais. O que vemos é o retorno a um estado mais primitivo de relações internacionais, baseado na força bruta e no culto à personalidade. O texto reporta a batalha; Harari analisa a guerra e o risco existencial que ela representa para a capacidade da humanidade de resolver problemas verdadeiramente globais, como as mudanças climáticas ou as pandemias.
+
+### <strong>Convite à Reflexão para o seu Público:</strong>
+
+Este impasse diplomático não é apenas sobre o Brasil e os EUA. É sobre todos nós. Ele nos obriga a perguntar:
+
+*   Em um mundo onde a imagem de um líder no Instagram ou no X pode ter mais peso do que um tratado, o que resta do conceito de "Estado"?
+*   Quando a "verdade" de uma relação internacional depende de quem narra a história com mais eficácia, como podemos construir confiança?
+*   Se nossos líderes podem ser tão facilmente "hackeados" por seus próprios orgulhos e pelas pressões da opinião pública algorítmica, quem realmente governa: o líder em seu palácio ou o algoritmo em seu servidor?
+
+O que está em jogo não é apenas uma tarifa sobre o aço. É a própria arquitetura de nosso mundo compartilhado, e a resposta que daremos a essa crise definirá o tipo de futuro que iremos habitar.
+                </div>
+            </div>
+            <button class="copy-button" onclick="copyPersonalizedAnalysisContent(this)">Copiar Análise Personalizada</button>
+        </section>
+
+    </main>
+
+    <!-- Call to Action Section -->
+    <section class="bg-gradient-to-r from-indigo-600 to-violet-700 py-16 px-4 sm:px-6 lg:px-8 text-white text-center rounded-t-3xl shadow-lg mt-12">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-6 leading-tight">
+                Pare de lutar contra o bloqueio criativo.
+            </h2>
+            <p class="text-xl sm:text-2xl font-light mb-8 opacity-90">
+                Comece a criar com SOPHIA. Sua próxima grande ideia está a um videoId de distância.
+            </p>
+            <a href="#" class="inline-block bg-white text-indigo-700 font-bold py-4 px-10 rounded-full shadow-xl hover:bg-gray-100 transition duration-300 ease-in-out transform hover:scale-105 text-lg">
+                Quero Minha SOPHIA Agora!
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-white py-8 px-4 sm:px-6 lg:px-8 text-center rounded-b-3xl">
+        <p class="text-sm opacity-80">&copy; 2025 SOPHIA. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Function to convert basic Markdown to HTML
+        function convertMarkdownToHtml(markdownText) {
+            if (!markdownText) return '';
+
+            let html = markdownText;
+
+            // Handle bold (**text**)
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            // Handle italic (*text* or _text_)
+            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            html = html.replace(/_(.*?)_/g, '<em>$1</em>');
+
+            // Handle headers (### Header)
+            html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+
+            // Handle lists (simple, assuming one item per line starting with - or *)
+            html = html.replace(/^\s*[-*]\s+(.*)$/gm, '<li>$1</li>');
+            html = html.replace(/(<li>.*<\/li>(\n<li>.*<\/li>)*)/g, '<ul>$1</ul>');
+
+            // Handle horizontal rule (---)
+            html = html.replace(/^-{3,}$/gm, '<hr>');
+
+            // Convert double newlines to paragraphs, single newlines to <br>
+            // This needs to be done carefully to not break other block elements
+            html = html.split('\n\n').map(paragraph => {
+                if (paragraph.startsWith('<h') || paragraph.startsWith('<ul') || paragraph.startsWith('<ol') || paragraph.startsWith('<blockquote') || paragraph.startsWith('<hr>') || paragraph.startsWith('<table')) {
+                    return paragraph; // Don't wrap block elements in <p>
+                }
+                return `<p>${paragraph.replace(/\n/g, '<br>')}</p>`;
+            }).join('');
+
+
+            return html;
+        }
+
+        // Function to parse and display the Pros/Cons table from raw text
+        function parseAndDisplayProsConsTable(rawText) {
+            const tableContainer = document.getElementById('personalized-analysis-content-table-container');
+            if (!tableContainer) return;
+
+            // Regex to find the table-like structure: starts with ###, then lines with |, then text
+            const tableRegex = /^(###\s*.*?\n)?(?:\|\s*Prós\s*\|\s*Contras\s*\|\n)?(?:\|[-]+\|[-]+\|\n)?((?:\|[^|]+\|[^|]+\|\n)*)/m;
+            const match = rawText.match(tableRegex);
+
+            if (match && match[2]) {
+                const tableContent = match[2];
+                let tableHtml = `
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2 mt-4">Quadro de Análise Crítica (Prós e Contras):</h3>
+                    <table class="table-pros-cons">
+                        <thead>
+                            <tr>
+                                <th>✔️ Prós (Conforme Sua Visão)</th>
+                                <th>❌ Contras (Conforme Sua Visão)</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+
+                const rows = tableContent.trim().split('\n');
+                rows.forEach(row => {
+                    const cells = row.split('|').map(cell => cell.trim()).filter(cell => cell !== '');
+                    if (cells.length === 2) {
+                        tableHtml += `
+                            <tr>
+                                <td>${convertMarkdownToHtml(cells[0])}</td>
+                                <td>${convertMarkdownToHtml(cells[1])}</td>
+                            </tr>`;
+                    }
+                });
+
+                tableHtml += `
+                        </tbody>
+                    </table>`;
+                tableContainer.innerHTML = tableHtml;
+
+                // Remove the table part from the main text
+                return rawText.replace(match[0], '').trim();
+            }
+            return rawText; // Return original text if no table found
+        }
+
+        // Function to copy text content to clipboard
+        async function copyContent(elementId, button) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                const textToCopy = element.innerText; // Get plain text from the rendered HTML
+                try {
+                    // Use navigator.clipboard.writeText if available (more modern)
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        await navigator.clipboard.writeText(textToCopy);
+                    } else {
+                        // Fallback for older browsers or environments where clipboard API is restricted
+                        const tempTextArea = document.createElement('textarea');
+                        tempTextArea.value = textToCopy;
+                        document.body.appendChild(tempTextArea);
+                        tempTextArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(tempTextArea);
+                    }
+                    button.textContent = 'Copiado!';
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.textContent = `Copiar ${elementId.replace('-content', '').replace('summary', 'Resumo').replace('pareto', 'Análise de Pareto').replace('considerations', 'Considerações')}`;
+                        button.classList.remove('copied');
+                    }, 2000);
+                } catch (err) {
+                    console.error('Falha ao copiar texto: ', err);
+                    button.textContent = 'Erro ao Copiar!';
+                    setTimeout(() => {
+                        button.textContent = `Copiar ${elementId.replace('-content', '').replace('summary', 'Resumo').replace('pareto', 'Análise de Pareto').replace('considerations', 'Considerações')}`;
+                    }, 2000);
+                }
+            }
+        }
+
+        // Function to copy the entire personalized analysis content (table + text)
+        async function copyPersonalizedAnalysisContent(button) {
+            const tableContainer = document.getElementById('personalized-analysis-content-table-container');
+            const textDiv = document.getElementById('personalized-analysis-content-text');
+            let fullText = '';
+
+            if (tableContainer && tableContainer.innerText.trim()) {
+                fullText += tableContainer.innerText.trim() + '\n\n'; // Get text from table
+            }
+            if (textDiv) {
+                fullText += textDiv.innerText.trim(); // Get text from main analysis
+            }
+
+            if (fullText) {
+                try {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        await navigator.clipboard.writeText(fullText);
+                    } else {
+                        const tempTextArea = document.createElement('textarea');
+                        tempTextArea.value = fullText;
+                        document.body.appendChild(tempTextArea);
+                        tempTextArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(tempTextArea);
+                    }
+                    button.textContent = 'Copiado!';
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.textContent = 'Copiar Análise Personalizada';
+                        button.classList.remove('copied');
+                    }, 2000);
+                } catch (err) {
+                    console.error('Falha ao copiar análise personalizada: ', err);
+                    button.textContent = 'Erro ao Copiar!';
+                    setTimeout(() => {
+                        button.textContent = 'Copiar Análise Personalizada';
+                    }, 2000);
+                }
+            }
+        }
+
+        // Initialize content after DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Placeholder for generated Summary Text
+            const summaryText = `<b>O silêncio mais caro do mundo?</b>
+
+Entre Lula e Trump, uma ligação virou um jogo de xadrez geopolítico. De um lado, a pressão por tarifas. Do outro, a tática de forçar o primeiro movimento. Não se trata apenas de diplomacia, mas de poder.
+
+A recusa em pegar o telefone é orgulho ferido, teimosia ou uma estratégia calculada para não demonstrar fraqueza? Uma única chamada poderia mudar tudo, mas o custo simbólico de quem cede primeiro parece ser o maior obstáculo.
+
+<b>Na sua opinião: é uma demonstração de força ou um erro estratégico?</b> Comente aqui.`;
+            document.getElementById('summary-content').innerHTML = convertMarkdownToHtml(summaryText);
+
+            // Placeholder for generated Pareto Analysis Text
+            const paretoText = `A análise do cenário diplomático entre os presidentes Lula e Trump revela um núcleo estratégico que transcende a mera disputa tarifária. Aplicando o Princípio de Pareto, os 20% de informações vitais que concentram 80% do valor e do potencial de conteúdo residem não nos eventos diários, mas na complexa teia de psicologia, estratégia e pressões políticas que definem o impasse.
+
+Esta é a mina de ouro para a criação de conteúdo aprofundado:
+
+<b>1. O Jogo de Poder Pessoal: A Diplomacia do Ego como Ferramenta de Coerção</b>
+A essência do conflito não são as tarifas, mas a recusa de Lula em fazer o primeiro contato telefônico direto com Trump. As tarifas são a alavanca de Trump para forçar uma concessão simbólica: a submissão de Lula em procurá-lo. Este é o ponto nevrálgico da narrativa.
+<ul>
+    <li><b>Potencial de Conteúdo:</b>
+        <ul>
+            <li><b>Webinar/Workshop:</b> "A Psicologia da Negociação de Alto Nível: Quando o Ego Define a Geopolítica". Análise de casos históricos em que a personalidade de líderes moldou resultados internacionais.</li>
+            <li><b>Artigo Aprofundado:</b> "A Tática do 'Primeiro Contato': Como Líderes Usam o Silêncio e a Espera como Armas Estratégicas".</li>
+            <li><b>Série de Vídeos:</b> Explorar as táticas de negociação de Trump versus a abordagem diplomática tradicional, usando este caso como peça central.</li>
+        </ul>
+    </li>
+</ul>
+
+<b>2. A Tensão Interna: Pragmatismo Econômico vs. Soberania Política</b>
+O texto expõe uma fissura crucial dentro do governo brasileiro: auxiliares que pressionam por uma solução pragmática (o telefonema para resolver a questão tarifária) contra a postura de Lula, que parece defender um princípio de soberania e não ceder à pressão externa. Este dilema interno é um microcosmo de um desafio comum na política externa.
+<ul>
+    <li><b>Potencial de Conteúdo:</b>
+        <ul>
+            <li><b>Painel de Debate:</b> Convidar analistas políticos e ex-diplomatas para discutir o tema: "Até que ponto um líder deve sacrificar um princípio de soberania em nome de um benefício econômico imediato?".</li>
+            <li><b>Estudo de Caso (E-book):</b> "O Dilema do Planalto: Uma Análise da Tomada de Decisão sob Pressão Dupla – Interna e Externa".</li>
+        </ul>
+    </li>
+</ul>
+
+<b>3. O Histórico como Arma e Vulnerabilidade</b>
+A narrativa habilmente contrapõe as ações de Lula (reconhecimento imediato de Trump, envio de carta) com a postura de Bolsonaro em relação a Biden. Isso é usado para construir a imagem de Lula como um diplomata mais ágil. No entanto, o seu apoio anterior à oponente de Trump (Kamala Harris) é uma vulnerabilidade subjacente que adiciona uma camada de animosidade pessoal ao impasse, tornando-o mais complexo do que uma simples questão de Estado.
+<ul>
+    <li><b>Potencial de Conteúdo:</b>
+        <ul>
+            <li><b>Infográfico Interativo/Timeline:</b> "Cronologia de uma Crise: Ações, Reações e Omissões na Relação Lula-Trump", destacando os pontos de inflexão e o contexto histórico.</li>
+            <li><b>Podcast Analítico:</b> "Fantasmas do Passado: Como Alianças e Declarações Anteriores Assombram as Relações Diplomáticas Atuais".</li>
+        </ul>
+    </li>
+</ul>
+
+Esses três pilares representam o coração pulsante da questão. Explorá-los permite ir além da notícia superficial, oferecendo ao público uma análise rica que reforça a autoridade, demonstra profundidade estratégica e abre portas para um ecossistema de conteúdo relevante e de alto impacto.`;
+            document.getElementById('pareto-content').innerHTML = convertMarkdownToHtml(paretoText);
+
+            // Placeholder for generated Considerations Text
+            const considerationsText = `Na complexa arena da geopolítica, o silêncio de um telefonema é, em si, uma poderosa declaração. O impasse atual não é apenas uma disputa de egos, mas um xadrez estratégico onde o custo da inação recai sobre a economia e as relações futuras. A verdadeira liderança não se mede por quem inicia o contato, mas por quem tem a visão de priorizar o interesse nacional acima do precedente pessoal. A decisão de romper este silêncio definirá se a diplomacia brasileira será guiada pelo <b>pragmatismo que gera resultados</b> ou pelo <b>orgulho que gera impasses</b>.`;
+            document.getElementById('considerations-content').innerHTML = convertMarkdownToHtml(considerationsText);
+
+            // Placeholder for generated Personalized Analysis Text (including table parsing)
+            let personalizedAnalysisRawText = `Com certeza. Eis a análise aprofundada, estruturada para transformar a notícia em uma reflexão filosófica e futurista.
+
+***
+
+### <strong>Análise Elevada: Da Crise Diplomática à Encruzilhada da Humanidade</strong>
+
+O episódio diplomático entre os presidentes Lula e Trump, centrado na hesitação de um telefonema, transcende a mera notícia política. Ele serve como um microcosmo perfeito para dissecarmos as tensões fundamentais do século XXI: o embate entre a personalidade e a instituição, a erosão das narrativas que nos uniam e o poder invisível dos novos sistemas tecnológicos que medeiam nossas relações.
+
+O que parece ser um impasse sobre tarifas é, na verdade, um palco onde se desenrola o futuro da governança, da identidade nacional e da própria natureza do poder.
+
+### <strong>1. Quadro de Análise Crítica: A Diplomacia na Era da Personalização</strong>
+
+<table border="1" style="width:100%; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th style="padding: 10px; background-color: #f2f2f2; text-align: left;"><strong>PRÓS (Oportunidades e Forças Emergentes)</strong></th>
+            <th style="padding: 10px; background-color: #f2f2f2; text-align: left;"><strong>CONTRAS (Dilemas e Fragilidades Expostas)</strong></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="padding: 10px; vertical-align: top;">
+                <strong>Realismo Pragmático:</strong> A pressão interna para que Lula realize o telefonema evidencia que, no limite, os interesses econômicos e estratégicos de uma nação (tarifas) tendem a se sobrepor a posturas ideológicas ou ressentimentos pessoais. Uma lição sobre a primazia da realpolitik na governança.
+            </td>
+            <td style="padding: 10px; vertical-align: top;">
+                <strong>A Hiper-Personalização do Poder:</strong> A estabilidade das relações globais torna-se refém dos egos, da história pessoal e do temperamento de líderes individuais. Instituições centenárias são subjugadas pela "química" (ou a falta dela) entre duas pessoas, expondo uma fragilidade sistêmica.
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; vertical-align: top;">
+                <strong>Transparência Radical (Não Intencional):</strong> A menção a tuítes e declarações passadas mostra como a tecnologia criou um arquivo público e permanente da diplomacia. Cada ato e palavra são registrados e podem ser usados como arma ou ferramenta, forçando um novo nível de responsabilidade (e vulnerabilidade).
+            </td>
+            <td style="padding: 10px; vertical-align: top;">
+                <strong>Diplomacia como Performance:</strong> O ato de "não telefonar" ou de "forçar o outro a procurar" transforma a política externa em um espetáculo para o público interno e externo. O foco se desloca da resolução de problemas para a gestão de imagem e a projeção de força, muitas vezes com resultados contraproducentes.
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; vertical-align: top;">
+                <strong>Sofisticação dos Canais Secundários:</strong> A menção a chanceleres, assessores e conversas de bastidores revela a resiliência do corpo diplomático profissional. Enquanto os líderes performam no palco principal, a máquina estatal trabalha nos bastidores para mitigar os danos e construir pontes, garantindo a continuidade.
+            </td>
+            <td style="padding: 10px; vertical-align: top;">
+                <strong>Erosão da Soberania Decisória:</strong> O líder, que deveria ser o soberano, mostra-se reativo, acuado por pressões da mídia, de opositores e da opinião pública digital. A dúvida sobre "se o presidente americano atenderia" revela uma inversão de poder, onde o medo da humilhação pública paralisa a ação estratégica.
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+### <strong>2. A Visão de Yuval Noah Harari: Diálogo com o Futuro</strong>
+
+Analisar este impasse pela lente de Yuval Noah Harari é como usar um microscópio de alta potência: o que era um simples conflito revela-se um sintoma de transformações profundas na condição humana. O telefonema que não acontece é um eco das grandes questões que Harari levanta sobre nosso futuro.
+
+#### <strong>Onde as Ideias se Encontram (Concordâncias)</strong>
+
+1.  <strong>A Diplomacia como <em>Ficção Coletiva</em>:</strong> Harari argumenta que a humanidade coopera através de histórias compartilhadas — nações, dinheiro, leis. O texto é a prova viva disso. O telefonema não é apenas uma conversa; é um símbolo, um ritual que reafirma uma narrativa de respeito, poder e hierarquia. A recusa em participar deste ritual é uma tentativa de reescrever a história da relação Brasil-EUA. A "dificuldade de agenda" ou a "saída às pressas do G7" são justificativas, novas ficções criadas para sustentar a narrativa desejada por cada lado. Estamos assistindo a uma guerra de narrativas em tempo real, onde o controle da história é o verdadeiro prêmio.
+
+2.  <strong>O Hackeamento do Estadista:</strong> Harari alerta que, com big data e biotecnologia, será possível "hackear" seres humanos, explorando seus vieses e emoções. Este cenário diplomático mostra uma versão analógica e política desse hackeamento. A estratégia de Trump de "bloquear as negociações" para forçar o contato é um hackeamento psicológico. Ele explora o dilema de Lula entre o orgulho pessoal e a pressão nacional. As referências ao apoio passado de Bolsonaro a Trump e de Lula a Kamala Harris demonstram como o sistema nervoso político dos líderes está exposto, com suas "preferências" e "lealdades" passadas sendo usadas como dados para prever e manipular seu comportamento futuro.
+
+3.  <strong>Dados são o Novo Poder:</strong> A importância dada ao reconhecimento imediato da vitória de Trump por Lula nas redes sociais e ao envio de uma carta que não foi respondida ilustra uma verdade harariana: no século XXI, a geração e o controle de dados (mesmo um simples tuíte) são atos de poder. O reconhecimento público é um dado que entra na ledger global. A ausência de uma resposta (um "retorno" de dados) é, em si, uma poderosa mensagem de desdém. O poder não está mais apenas nos exércitos ou na economia, mas na capacidade de controlar o fluxo de informação e reconhecimento.
+
+#### <strong>Onde as Perspectivas Divergem ou se Complementam (Contraposições Críticas)</strong>
+
+1.  <strong>Agência Humana vs. Determinismo Algorítmico:</strong> O texto ainda enquadra a situação como um drama de escolhas humanas conscientes. Lula "rejeita", "avalia", "é aconselhado". Harari, por outro lado, nos levaria a questionar a profundidade dessa agência. Ele argumentaria que as "escolhas" desses líderes são cada vez mais o resultado de complexos algoritmos invisíveis: não apenas os das redes sociais que moldam a opinião pública, mas os algoritmos econômicos que calculam o impacto das tarifas e os algoritmos políticos internos que medem o custo de cada ação. O texto foca no <em>ator</em>; Harari focaria no <em>sistema</em> que formata e limita as ações do ator. A perspectiva de Harari não contradiz o texto, mas a aprofunda, sugerindo que os líderes talvez sejam menos mestres de seu destino e mais interfaces de forças sistêmicas que mal compreendem.
+
+2.  <strong>O Foco no Indivíduo vs. a Ameaça à Cooperação Global:</strong> A narrativa jornalística, por sua natureza, concentra-se nos protagonistas: Lula, Trump, Vieira. É uma história de homens. Harari nos forçaria a um zoom out radical. Para ele, o perigo real não é se Lula vai ou não telefonar para Trump. O perigo é que este episódio exemplifica o colapso da narrativa liberal que sustentou a cooperação global por 70 anos — a crença em instituições multilaterais, no diálogo e em regras universais. O que vemos é o retorno a um estado mais primitivo de relações internacionais, baseado na força bruta e no culto à personalidade. O texto reporta a batalha; Harari analisa a guerra e o risco existencial que ela representa para a capacidade da humanidade de resolver problemas verdadeiramente globais, como as mudanças climáticas ou as pandemias.
+
+### <strong>Convite à Reflexão para o seu Público:</strong>
+
+Este impasse diplomático não é apenas sobre o Brasil e os EUA. É sobre todos nós. Ele nos obriga a perguntar:
+
+*   Em um mundo onde a imagem de um líder no Instagram ou no X pode ter mais peso do que um tratado, o que resta do conceito de "Estado"?
+*   Quando a "verdade" de uma relação internacional depende de quem narra a história com mais eficácia, como podemos construir confiança?
+*   Se nossos líderes podem ser tão facilmente "hackeados" por seus próprios orgulhos e pelas pressões da opinião pública algorítmica, quem realmente governa: o líder em seu palácio ou o algoritmo em seu servidor?
+
+O que está em jogo não é apenas uma tarifa sobre o aço. É a própria arquitetura de nosso mundo compartilhado, e a resposta que daremos a essa crise definirá o tipo de futuro que iremos habitar.`;
+            // First, try to parse and display the table, and get the remaining text
+            const remainingText = parseAndDisplayProsConsTable(personalizedAnalysisRawText);
+            document.getElementById('personalized-analysis-content-text').innerHTML = convertMarkdownToHtml(remainingText);
+        });
+    </script>
+</body>
+</html>
