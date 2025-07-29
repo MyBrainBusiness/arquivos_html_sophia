@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOPHIA: Seu Kit de Conteúdo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
+    }
+    .copy-button {
+      background: linear-gradient(to right, #6366f1, #8b5cf6);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    .copy-button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(to right, #4f46e5, #7c3aed);
+    }
+    .copy-button.copied {
+      background: linear-gradient(to right, #22c55e, #16a34a);
+    }
+    .markdown-content p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .gradient-header {
+      background: linear-gradient(to right, #6366f1, #8b5cf6);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="gradient-header py-12 text-white text-center">
+    <h1 class="text-4xl font-bold">✨ Seu Kit de Conteúdo SOPHIA! ✨</h1>
+    <p class="mt-2 text-xl">Conteúdo personalizado gerado com inteligência para você brilhar.</p>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-10 space-y-10">
+    <section>
+      <h2 class="text-2xl font-bold text-indigo-700 mb-2">📝 A BRILHANTE IDEIA</h2>
+      <p class="text-sm italic text-gray-500 mb-4">Sua próxima postagem, pronta para cativar.</p>
+      <div id="summary-content" class="markdown-content bg-white rounded-xl shadow p-6"></div>
+      <button class="copy-button mt-4" onclick="copyContent('summary-content', this)">Copiar Resumo</button>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-bold text-purple-700 mb-2">🧠 A MINA DE OURO</h2>
+      <p class="text-sm italic text-gray-500 mb-4">Insights cruciais para aprofundar seu conteúdo.</p>
+      <div id="pareto-content" class="markdown-content bg-white rounded-xl shadow p-6"></div>
+      <button class="copy-button mt-4" onclick="copyContent('pareto-content', this)">Copiar Análise de Pareto</button>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-bold text-pink-700 mb-2">💡 O TOQUE DE SABEDORIA</h2>
+      <p class="text-sm italic text-gray-500 mb-4">Uma conclusão poderosa para deixar sua marca.</p>
+      <div id="considerations-content" class="markdown-content bg-white rounded-xl shadow p-6"></div>
+      <button class="copy-button mt-4" onclick="copyContent('considerations-content', this)">Copiar Considerações</button>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-bold text-teal-700 mb-2">🔭 SUA VISÃO DO FUTURO</h2>
+      <p class="text-sm italic text-gray-500 mb-4">Análises que refletem o SEU pensamento único.</p>
+      <div id="personalized-analysis-content" class="markdown-content bg-white rounded-xl shadow p-6"></div>
+      <button class="copy-button mt-4" onclick="copyContent('personalized-analysis-content', this)">Copiar Análise Personalizada</button>
+    </section>
+  </main>
+
+  <footer class="bg-gray-900 text-white py-6 text-center">
+    <p class="text-sm">&copy; 2025 SOPHIA. Todos os direitos reservados. MyBrain Business</p>
+  </footer>
+
+  <script>
+    // Render HTML puro da IA (sem converter markdown)
+
+// RESUMO
+const summaryRaw = `Em uma disputa de poder, quem age primeiro nem sempre vence.
+
+A decisão de não fazer um telefonema imediato diante de uma provocação externa revela uma lição poderosa sobre estratégia: em diplomacia e em negócios, <b>timing é tudo</b>.
+
+Às vezes, a jogada mais forte não é a reação impulsiva, mas a paciência calculada. É dar espaço para que as consequências dos atos do outro — como pressões internas e reveses econômicos — se tornem seu maior argumento.
+
+É a diferença entre reagir para provar um ponto e aguardar para vencer o jogo.
+
+Você concorda que o silêncio estratégico pode ser a arma mais eficaz?`;
+console.log("Resumo:", summaryRaw);
+
+document.getElementById('summary-content').innerHTML = JSON.parse(`"${summaryRaw}"`);
+
+// PARETO
+const paretoRaw = `A análise a seguir extrai os 20% de conceitos estratégicos do texto, transformando um comentário político pontual em uma mina de ouro para a criação de conteúdo aprofundado e de alto impacto.
+
+A essência do material não reside na disputa política superficial, mas em três pilares estratégicos de relações internacionais e comunicação de crise que, juntos, representam 80% do valor do conteúdo.
+
+<h3>A Mina de Ouro: Insights Estratégicos e Oportunidades</h3>
+
+<strong>1. A Diplomacia da Paciência Estratégica: O "Timing" como Ativo Central</strong>
+
+O insight mais valioso é o princípio de que <em>"em política, timing é tudo"</em>. Esta não é uma mera frase de efeito, mas a base de uma doutrina de contenção deliberada. A recomendação de não ligar para Trump não é passividade, mas uma ação estratégica que aguarda o momento de maior vantagem. A instabilidade do oponente ("impulsivo", "volúvel") e o fato de a sanção ainda não estar em vigor transformam a paciência em um ativo tático, evitando uma reação prematura a uma ameaça que pode nem se concretizar.
+
+<ul>
+    <li><strong>Conteúdo Secundário:</strong>
+        <ul>
+            <li><strong>Webinar:</strong> "A Arte da Guerra na Diplomacia Moderna: Por Que a Paciência Estratégica Supera a Reação Imediata".</li>
+            <li><strong>Artigo Aprofundado:</strong> "Timing como Poder: Analisando Casos Históricos Onde a Espera Definiu o Resultado de Crises Internacionais".</li>
+        </ul>
+    </li>
+</ul>
+
+<strong>2. A Pressão Econômica Indireta: A Arma Silenciosa</strong>
+
+O ponto crucial é a identificação de que a contraofensiva mais eficaz não é diplomática, mas econômica e interna ao adversário. A análise de que empresas americanas seriam prejudicadas pelo "tarifaço" e já exercem pressão sobre políticos republicanos é um insight de mestre. Ele desloca o eixo do conflito de uma briga entre dois presidentes para uma complexa teia de interesses comerciais que pode resolver o problema de forma orgânica.
+
+<ul>
+    <li><strong>Conteúdo Secundário:</strong>
+        <ul>
+            <li><strong>Série de Vídeos:</strong> "O Efeito Bumerangue: Como Sanções Econômicas Criam Aliados Inesperados". Cada vídeo poderia focar em um setor (agronegócio, indústria, etc.).</li>
+            <li><strong>Workshop:</strong> "Mapeamento de Stakeholders em Conflitos Globais: Como Identificar e Alavancar Pressão Indireta".</li>
+        </ul>
+    </li>
+</ul>
+
+<strong>3. A Armadilha da Justificativa: Soberania Não Se Explica</strong>
+
+O conceito de que seria "constrangedor" e um "desgaste" para um chefe de Estado tomar a iniciativa de "explicar o óbvio" – que a soberania é inegociável – é profundamente estratégico. Ligar para afirmar tal ponto seria cair em uma armadilha retórica, projetando uma imagem de fraqueza e necessidade de validação. Isso transforma o agressor em protagonista e o agredido em um ator reativo. A recusa em se justificar é, em si, a mais forte demonstração de autoridade.
+
+<ul>
+    <li><strong>Conteúdo Secundário:</strong>
+        <ul>
+            <li><strong>Ensaio de Opinião:</strong> "O Poder do Silêncio Afirmativo: Por Que a Soberania Não Pede Licença".</li>
+            <li><strong>Módulo de Curso (Comunicação/R.I.):</strong> "Enquadramento e Narrativa em Crises Internacionais: Evitando a Armadilha da Justificativa".</li>
+        </ul>
+    </li>
+</ul>
+
+Estes três pilares formam o núcleo de 20% que carrega 80% da relevância. Eles elevam a discussão de uma briga política para uma aula sobre estratégia, psicologia de negociação e poder brando, oferecendo um roteiro valioso para a criação de conteúdo que reforça a autoridade e inspira novas perspectivas.`;
+console.log("Pareto:", paretoRaw);
+document.getElementById('pareto-content').innerHTML = JSON.parse(`"${paretoRaw}"`);
+
+// CONSIDERAÇÕES
+const considerationsRaw = `### Considerações Estratégicas
+
+Frente a um adversário volátil, a mais poderosa demonstração de força não é a reação, mas a <b>paciência estratégica</b>. A verdadeira soberania não se afirma em um telefonema apressado para explicar o óbvio, mas na sabedoria de aguardar que o tempo e a pressão interna revelem as fraquezas do oponente.
+
+Em política, saber <i>quando não agir</i> é a mais refinada forma de controle. É a diferença crucial entre cair em uma armadilha e assistir, de camarote, o adversário se enredar em suas próprias contradições. O silêncio, aqui, não é omissão; é poder.`;
+console.log("Considerações:", considerationsRaw); 
+document.getElementById('considerations-content').innerHTML = JSON.parse(`"${considerationsRaw}"`);
+
+// ANÁLISE CRÍTICA + TABELA
+let analysisRaw = `Absolutamente. Como um pensador que transita entre o passado, o presente e as projeções futuras, analisarei o texto fornecido para transformá-lo em um material de profunda reflexão, digno de um debate global e filosófico.
+
+A seguir, apresento a análise estruturada conforme solicitado.
+
+<hr>
+
+<h2>Quadro de Análise Crítica: A Diplomacia do Espetáculo na Era Pós-Verdade</h2>
+<p>O cerne da questão transcende a disputa tarifária entre Brasil e EUA. Estamos diante de um fenômeno global: a transformação da diplomacia em um espetáculo midiático, onde a percepção pública e a construção de narrativas superam a negociação tradicional. Este quadro explora as implicações dessa nova realidade.</p>
+<table border="1" cellpadding="10" cellspacing="0" style="width:100%; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th style="background-color:#f2f2f2; text-align: left;">
+                <b>Prós (Oportunidades e Vantagens Estratégicas)</b>
+            </th>
+            <th style="background-color:#f2f2f2; text-align: left;">
+                <b>Contras (Riscos e Dilemas Éticos)</b>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td valign="top">
+                <ul>
+                    <li><b>Comunicação Direta e Mobilização:</b> Líderes podem contornar a mídia e a burocracia tradicionais, falando diretamente com suas bases e com o público global. Isso permite a criação rápida de narrativas mobilizadoras e a demonstração de força simbólica, como a defesa da "soberania inegociável".</li>
+                    <li><b>Guerra Assimétrica de Narrativas:</b> Um ator com menor poder geopolítico pode usar a previsível impulsividade de um adversário (como a de Trump) a seu favor. A recusa em "entrar no jogo" (a sugestão de não ligar) torna-se uma jogada estratégica, expondo a irracionalidade do oponente e ganhando apoio moral e político.</li>
+                    <li><b>Agilidade e Adaptação:</b> Em um mundo de notícias 24 horas e viralização instantânea, a capacidade de responder ou, mais importante, de <i>não</i> responder no "timing" correto (como argumenta Trigueiro) é uma nova e poderosa ferramenta de poder, moldando a percepção pública em tempo real.</li>
+                </ul>
+            </td>
+            <td valign="top">
+                <ul>
+                    <li><b>Erosão da Diplomacia Substancial:</b> Questões complexas (comércio, meio ambiente, segurança) são reduzidas a confrontos pessoais e "memes" políticos. O foco se desloca da busca de soluções duradouras para a obtenção de "vitórias" performáticas de curto prazo, como "não ser vítima de bullying".</li>
+                    <li><b>Instabilidade Sistêmica:</b> A diplomacia baseada no personalismo e na imprevisibilidade, como a de Trump, gera incerteza global. Mercados reagem, alianças são postas à prova e a confiança mútua, pilar das relações internacionais, é corroída em favor do espetáculo.</li>
+                    <li><b>Tirania da Aparência:</b> O sucesso de um líder passa a ser medido não por seus resultados concretos (melhora da vida das pessoas, acordos benéficos), mas por sua habilidade de "sair por cima" e "não parecer fraco". Isso cria um ciclo vicioso de polarização e confronto, onde o diálogo genuíno é visto como constrangedor ou como sinal de derrota.</li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>A Visão de Yuval Noah Harari: Diálogo com o Futuro</h2>
+<p>O episódio narrado no texto, aparentemente um impasse diplomático localizado, é, na verdade, um microcosmo perfeito para as grandes transformações e dilemas que Yuval Noah Harari aponta para o século XXI. Analisar essa situação através das lentes de Harari eleva o debate de uma mera disputa política para uma reflexão sobre o futuro da cooperação humana, do poder e da própria verdade.</p>
+
+<h3>1. Narrativas, Ficções e a Nova Ordem Mundial</h3>
+<p>Harari argumenta que a humanidade domina o planeta porque é a única espécie capaz de cooperar em massa, e fazemos isso através de crenças em histórias compartilhadas: nações, dinheiro, religiões, direitos humanos. O texto é um campo de batalha explícito por essas narrativas.</p>
+
+<h4><b>Onde as ideias se encontram:</b></h4>
+<p>O texto demonstra com clareza a tese de Harari. A preocupação central não é o "tarifaço" de 50%, mas sim a "narrativa para a extrema direita mundial". Trump não busca apenas uma vantagem econômica; ele busca validar sua ficção de poder, onde ele é o "vencedor" e os outros são humilhados. Do outro lado, a estratégia de Lula e do Itamaraty é proteger a narrativa da "soberania brasileira" e da "seriedade", uma ficção igualmente poderosa que sustenta a identidade nacional e a dignidade de um Estado.</p>
+
+<h4><b>Onde as perspectivas divergem ou complementam-se de forma crítica:</b></h4>
+<p>O texto vê essa guerra de narrativas como um jogo a ser vencido. Harari nos alertaria para o perigo maior: quando as narrativas se tornam tão polarizadas e divorciadas de uma realidade objetiva (como dados econômicos ou científicos), a cooperação global em desafios existenciais — como pandemias, mudanças climáticas ou a regulação da Inteligência Artificial — se torna impossível. A luta para "vencer" a narrativa do dia pode nos fazer perder a trama da história humana.</p>
+<p><i><b>Para seu público:</b> Será que, ao nos concentrarmos em "ganhar" a batalha narrativa contra adversários políticos, não estamos minando nossa capacidade coletiva de acreditar em qualquer história que possa nos unir para resolver os problemas reais e globais que nos ameaçam a todos?</i></p>
+
+<h3>2. Inteligência vs. Consciência e o Desafio da Liderança</h3>
+<p>Harari faz uma distinção crucial entre <i>inteligência</i> (a capacidade de resolver problemas) e <i>consciência</i> (a capacidade de sentir, de ter empatia, de experienciar alegria ou dor). Ele teme um futuro onde a superinteligência da IA seja desprovida de consciência.</p>
+
+<h4><b>Onde as ideias se encontram:</b></h4>
+<p>O retrato de Trump no texto é o de uma figura politicamente <i>inteligente</i>: ele entende como manipular a mídia, como provocar reações, como se manter no centro das atenções. Contudo, ele é descrito como desprovido de <i>consciência</i> diplomática: ele "humilha" líderes, é "impulsivo" e não se importa com a estabilidade das relações, apenas com sua vitória pessoal. Ele é a personificação política da inteligência dissociada da consciência.</p>
+
+<h4><b>Onde as perspectivas divergem ou complementam-se de forma crítica:</b></h4>
+<p>Enquanto o texto se concentra na personalidade de Trump, Harari nos levaria a ver isso como um sintoma de uma tendência tecnológica e social mais ampla. As redes sociais e os algoritmos que dominam nosso ecossistema de informação são, por natureza, pura inteligência sem consciência. Eles otimizam para o engajamento, não para a verdade ou a empatia. Líderes como Trump não apenas usam essa tecnologia; eles são o produto perfeito dela. Eles personificam o próprio ethos do algoritmo: maximizar o impacto, independentemente das consequências emocionais ou sociais.</p>
+<p><i><b>Para seu público:</b> Em uma era dominada por algoritmos que recompensam o choque e o confronto, estamos inevitavelmente selecionando líderes que refletem essas mesmas características? Estamos, sem perceber, preferindo a inteligência performática em detrimento da consciência e da sabedoria?</i></p>
+
+<h3>3. O Futuro da Soberania em um Mundo de Dados</h3>
+<p>O conceito de "soberania" é o pilar da argumentação do texto. Lula não pode ligar para "explicar o óbvio" de que a "soberania não se negocia". É uma questão de honra nacional.</p>
+
+<h4><b>Onde as ideias se encontram:</b></h4>
+<p>Ambos, o texto e Harari, reconhecem que a soberania é uma das mais poderosas ficções que sustentam o sistema de nações. A defesa dessa soberania é o que justifica a existência do Estado e a lealdade de seus cidadãos.</p>
+
+<h4><b>Onde as perspectivas divergem ou complementam-se de forma crítica:</b></h4>
+<p>Harari argumentaria que este conceito de soberania, forjado nos séculos XVIII e XIX, está se tornando obsoleto. Hoje, a verdadeira soberania não está sendo desafiada por tarifas sobre suco de laranja, mas pelo fluxo de dados. Enquanto o Brasil se preocupa com a apropriação de suas "riquezas raras" (um conceito do século XX), quem está se apropriando dos dados de seus cidadãos? As corporações do Vale do Silício e da China estão construindo impérios de dados que podem conhecer e influenciar a população brasileira melhor do que seu próprio governo. Esta é a nova colonização, a "data-colonização".</p>
+<p>A ironia apontada por Harari seria devastadora: enquanto líderes travam batalhas simbólicas e performáticas sobre a soberania territorial e econômica, eles podem estar entregando a verdadeira soberania do século XXI — a soberania sobre a informação e a atenção humana — sem sequer perceberem a luta.</p>
+<p><i><b>Para seu público:</b> O que significa "soberania" hoje? É defender nossas fronteiras e commodities, ou é defender nossos dados, nossa privacidade e nossa capacidade de pensar livremente em um mundo onde algoritmos podem prever e moldar nossos desejos? A batalha descrita no vídeo é a verdadeira guerra pela soberania, ou apenas uma distração espetacular?</i></p>`;
+analysisRaw = JSON.parse(`"${analysisRaw}"`);
+const remainingText = parseAndDisplayProsConsTable(analysisRaw);
+console.log("Análise:", analysisRaw);
+document.getElementById('personalized-analysis-content-text').innerHTML = remainingText;
+
+
+    async function copyContent(id, btn) {
+      const text = document.getElementById(id).innerText;
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.textContent = 'Copiado!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = btn.textContent.replace('Copiado!', 'Copiar ');
+          btn.classList.remove('copied');
+        }, 2000);
+      } catch {
+        btn.textContent = 'Erro ao copiar!';
+      }
+    }
+  </script>
+
+</body>
+</html>
